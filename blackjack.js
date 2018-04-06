@@ -3,53 +3,78 @@
 // ctx.rect(50,50,100,150);
 // ctx.stroke();
 
+var dealerCard = {};
+var playerHand = {};
+var playerCard1 = {};
+var playerCard2 = {};
+
 const calcDealerHand = () => {
-   let dealerCard = deck[Math.floor(deck.length * Math.random())];
+   dealerCard = deck[Math.floor(deck.length * Math.random())];
    dealerCard.played = true;
    console.log(`Dealer card: ${dealerCard.rank} of ${dealerCard.suit}`);
 }
 
 const calcPlayerHand = () => {
-   let playerHand = [];
-   let playerCard1 = {};
-   let playerCard2 = {};
-   let playerHandType;
 
    // consider replacing with .filter
-   while (playerCard1.played !== false) {
-      playerCard1 = deck[Math.floor(deck.length * Math.random())]
+   playerHand.playerCard1 = deck[Math.floor(deck.length * Math.random())]
+   while (playerHand.playerCard1.played !== false) {
+      playerHand.playerCard1 = deck[Math.floor(deck.length * Math.random())]
    }
-   playerCard1.played = true;
+   playerHand.playerCard1.played = true;
 
-   while (playerCard2.played !== false) {
-      playerCard2 = deck[Math.floor(deck.length * Math.random())]
+   playerHand.playerCard2 = deck[Math.floor(deck.length * Math.random())]
+   while (playerHand.playerCard2.played !== false) {
+      playerHand.playerCard2 = deck[Math.floor(deck.length * Math.random())]
    }
-   playerCard2.played = true;
-
-   playerHand.push(playerCard1);
-   playerHand.push(playerCard2);
-   console.log(`Player card 1: ${playerCard1.rank} of ${playerCard1.suit}`);
-   console.log(`Player card 2: ${playerCard2.rank} of ${playerCard2.suit}`);
+   playerHand.playerCard2.played = true;
 
    // check for an ace, else check for a pair, else hand is standard
-   if ((playerHand[0].rank === 'ace' || playerHand[1].rank === 'ace') && (playerHand[0].rank !== playerHand[1].rank)) {
-      playerHandType = 'ace';
-   } else if ((playerHand[0].rank === playerHand[1].rank) && (playerHand[0].value === playerHand[1].value) && ((typeof playerHand[0].rank === 'number' && typeof playerHand[1].rank === 'number') || playerHand[0].rank === 'ace')) {
-      playerHandType = 'pair';
+   if ((playerHand.playerCard1.rank === 'A' || playerHand.playerCard2.rank === 'A') && (playerHand.playerCard1.rank !== playerHand.playerCard2.rank)) {
+      playerHand.playerHandType = 'ace';
+   } else if ((playerHand.playerCard1.rank === playerHand.playerCard2.rank) && (playerHand.playerCard1.value === playerHand.playerCard2.value) && ((typeof playerHand.playerCard1.rank === 'number' && typeof playerHand.playerCard2.rank === 'number') || playerHand.playerCard1.rank === 'A')) {
+      playerHand.playerHandType = 'pair';
    } else {
-      playerHandType = 'standard';
+      playerHand.playerHandType = 'standard';
    }
-   playerHand.push(playerHandType);
-   console.log(`Player hand type: ${playerHand[2]}`);
+
+   console.log(`Player card 1: ${playerHand.playerCard1.rank} of ${playerHand.playerCard1.suit}`);
+   console.log(`Player card 2: ${playerHand.playerCard2.rank} of ${playerHand.playerCard2.suit}`);
+   console.log(`Player hand type: ${playerHand.playerHandType}`);
+}
+
+const getCorrectMove = (dealerPlayerHandKey) => {
+   // find correct move by matching on dealerCard + playerHandSummary and getting correctMove.
+   let correctMove = oddsTable[dealerPlayerHandKey].correctMove;
+   console.log(`Correct move: ${correctMove}`);
 }
 
 const determineCorrectMove = () => {
-   
+   let playerHandSummary;
+   switch (playerHand.playerHandType) {
+      case 'standard':
+         playerHandSummary = playerHand.playerCard1.value + playerHand.playerCard2.value;
+         break;
+      case 'ace':
+         // ensure the ace is always the first one listed in playerHandSummary
+         if (playerHand.playerCard1.rank === 'A') {
+            playerHandSummary = playerHand.playerCard1.rank + playerHand.playerCard2.rank;
+         } else {
+            playerHandSummary = playerHand.playerCard2.rank + playerHand.playerCard1.rank;
+         }
+         break;
+      case 'pair':
+         playerHandSummary = playerHand.playerCard1.rank + playerHand.playerCard2.rank;
+         break;   
+   }
+   playerHand.sum = playerHandSummary;
+   let dealerPlayerHandKey = dealerCard.rank + playerHandSummary;
+   console.log(`dealerPlayerHandKey: ${dealerPlayerHandKey}`);
+   getCorrectMove(dealerPlayerHandKey);
 }
 
 $(document).ready(function() {
    // let newDeck = new deck; // initialize new deck
-
    calcDealerHand();
    // showDealerHand();
    calcPlayerHand();
