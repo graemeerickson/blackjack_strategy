@@ -1,314 +1,353 @@
 const deck = [
    {
-      rank: 2,
-      suit: 'club',
+      rank: '2',
+      suit: 'clubs',
       value: 2,
       played: false
    },
    {
-      rank: 2,
-      suit: 'diamond',
+      rank: '2',
+      suit: 'diamonds',
       value: 2,
       played: false
    },
    {
-      rank: 2,
-      suit: 'heart',
+      rank: '2',
+      suit: 'hearts',
       value: 2,
       played: false
    },
    {
-      rank: 2,
-      suit: 'spade',
+      rank: '2',
+      suit: 'spades',
       value: 2,
       played: false
    },
    {
-      rank: 3,
-      suit: 'club',
+      rank: '3',
+      suit: 'clubs',
       value: 3,
       played: false
    },
    {
-      rank: 3,
-      suit: 'diamond',
+      rank: '3',
+      suit: 'diamonds',
       value: 3,
       played: false
    },
    {
-      rank: 3,
-      suit: 'heart',
+      rank: '3',
+      suit: 'hearts',
       value: 3,
       played: false
    },
    {
-      rank: 3,
-      suit: 'spade',
+      rank: '3',
+      suit: 'spades',
       value: 3,
       played: false
    },
    {
-      rank: 4,
-      suit: 'club',
+      rank: '4',
+      suit: 'clubs',
       value: 4,
       played: false
    },
    {
-      rank: 4,
-      suit: 'diamond',
+      rank: '4',
+      suit: 'diamonds',
       value: 4,
       played: false
    },
    {
-      rank: 4,
-      suit: 'heart',
+      rank: '4',
+      suit: 'hearts',
       value: 4,
       played: false
    },
    {
-      rank: 4,
-      suit: 'spade',
+      rank: '4',
+      suit: 'spades',
       value: 4,
       played: false
    },
    {
-      rank: 5,
-      suit: 'club',
+      rank: '5',
+      suit: 'clubs',
       value: 5,
       played: false
    },
    {
-      rank: 5,
-      suit: 'diamond',
+      rank: '5',
+      suit: 'diamonds',
       value: 5,
       played: false
    },
    {
-      rank: 5,
-      suit: 'heart',
+      rank: '5',
+      suit: 'hearts',
       value: 5,
       played: false
    },
    {
-      rank: 5,
-      suit: 'spade',
+      rank: '5',
+      suit: 'spades',
       value: 5,
       played: false
    },
    {
-      rank: 6,
-      suit: 'club',
+      rank: '6',
+      suit: 'clubs',
       value: 6,
       played: false
    },
    {
-      rank: 6,
-      suit: 'diamond',
+      rank: '6',
+      suit: 'diamonds',
       value: 6,
       played: false
    },
    {
-      rank: 6,
-      suit: 'heart',
+      rank: '6',
+      suit: 'hearts',
       value: 6,
       played: false
    },
    {
-      rank: 6,
-      suit: 'spade',
+      rank: '6',
+      suit: 'spades',
       value: 6,
       played: false
    },
    {
-      rank: 7,
-      suit: 'club',
+      rank: '7',
+      suit: 'clubs',
       value: 7,
       played: false
    },
    {
-      rank: 7,
-      suit: 'diamond',
+      rank: '7',
+      suit: 'diamonds',
       value: 7,
       played: false
    },
    {
-      rank: 7,
-      suit: 'heart',
+      rank: '7',
+      suit: 'hearts',
       value: 7,
       played: false
    },
    {
-      rank: 7,
-      suit: 'spade',
+      rank: '7',
+      suit: 'spades',
       value: 7,
       played: false
    },
    {
-      rank: 8,
-      suit: 'club',
+      rank: '8',
+      suit: 'clubs',
       value: 8,
       played: false
    },
    {
-      rank: 8,
-      suit: 'diamond',
+      rank: '8',
+      suit: 'diamonds',
       value: 8,
       played: false
    },
    {
-      rank: 8,
-      suit: 'heart',
+      rank: '8',
+      suit: 'hearts',
       value: 8,
       played: false
    },
    {
-      rank: 8,
-      suit: 'spade',
+      rank: '8',
+      suit: 'spades',
       value: 8,
       played: false
    },
    {
-      rank: 9,
-      suit: 'club',
+      rank: '9',
+      suit: 'clubs',
       value: 9,
       played: false
    },
    {
-      rank: 9,
-      suit: 'diamond',
+      rank: '9',
+      suit: 'diamonds',
       value: 9,
       played: false
    },
    {
-      rank: 9,
-      suit: 'heart',
+      rank: '9',
+      suit: 'hearts',
       value: 9,
       played: false
    },
    {
-      rank: 9,
-      suit: 'spade',
+      rank: '9',
+      suit: 'spades',
       value: 9,
       played: false
    },
    {
-      rank: 10,
-      suit: 'club',
+      rank: '10',
+      suit: 'clubs',
       value: 10,
       played: false
    },
    {
-      rank: 10,
-      suit: 'diamond',
+      rank: '10',
+      suit: 'diamonds',
       value: 10,
       played: false
    },
    {
-      rank: 10,
-      suit: 'heart',
+      rank: '10',
+      suit: 'hearts',
       value: 10,
       played: false
    },
    {
-      rank: 10,
-      suit: 'spade',
+      rank: '10',
+      suit: 'spades',
       value: 10,
       played: false
    },
    {
-      rank: 'jack',
-      suit: 'club',
+      rank: 'J',
+      suit: 'clubs',
       value: 10,
       played: false
    },
    {
-      rank: 'jack',
-      suit: 'diamond',
+      rank: 'J',
+      suit: 'diamonds',
       value: 10,
       played: false
    },
    {
-      rank: 'jack',
-      suit: 'heart',
+      rank: 'J',
+      suit: 'hearts',
       value: 10,
       played: false
    },
    {
-      rank: 'jack',
-      suit: 'spade',
+      rank: 'J',
+      suit: 'spades',
       value: 10,
       played: false
    },
    {
-      rank: 'queen',
-      suit: 'club',
+      rank: 'Q',
+      suit: 'clubs',
       value: 10,
       played: false
    },
    {
-      rank: 'queen',
-      suit: 'diamond',
+      rank: 'Q',
+      suit: 'diamonds',
       value: 10,
       played: false
    },
    {
-      rank: 'queen',
-      suit: 'heart',
+      rank: 'Q',
+      suit: 'hearts',
       value: 10,
       played: false
    },
    {
-      rank: 'queen',
-      suit: 'spade',
+      rank: 'Q',
+      suit: 'spades',
       value: 10,
       played: false
    },
    {
-      rank: 'king',
-      suit: 'club',
+      rank: 'K',
+      suit: 'clubs',
       value: 10,
       played: false
    },
    {
-      rank: 'king',
-      suit: 'diamond',
+      rank: 'K',
+      suit: 'diamonds',
       value: 10,
       played: false
    },
    {
-      rank: 'king',
-      suit: 'heart',
+      rank: 'K',
+      suit: 'hearts',
       value: 10,
       played: false
    },
    {
-      rank: 'king',
-      suit: 'spade',
+      rank: 'K',
+      suit: 'spades',
       value: 10,
       played: false
    },
    {
-      rank: 'ace',
-      suit: 'club',
+      rank: 'A',
+      suit: 'clubs',
       value: 1,
       played: false
    },
    {
-      rank: 'ace',
-      suit: 'diamond',
+      rank: 'A',
+      suit: 'diamonds',
       value: 1,
       played: false
    },
    {
-      rank: 'ace',
-      suit: 'heart',
+      rank: 'A',
+      suit: 'hearts',
       value: 1,
       played: false
    },
    {
-      rank: 'ace',
-      suit: 'spade',
+      rank: 'A',
+      suit: 'spades',
       value: 1,
       played: false
    }
-]
+];
+
+const oddsTable = {
+   '25': {
+            handType: 'standard',
+            dealer: 2,
+            player: '5',
+            correctMove: 'H'
+         },
+   '26': {
+            handType: 'standard',
+            dealer: 2,
+            player: '6',
+            correctMove: 'H'
+         },
+   '27': {
+            handType: 'standard',
+            dealer: 2,
+            player: '7',
+            correctMove: 'H'
+         },
+   '28': {
+            handType: 'standard',
+            dealer: 2,
+            player: '8',
+            correctMove: 'H'
+         },
+   '29': {
+            handType: 'standard',
+            dealer: 2,
+            player: '9',
+            correctMove: 'H'
+         },
+   '210': {
+            handType: 'standard',
+            dealer: 2,
+            player: '10',
+            correctMove: 'D'
+         }
+}
