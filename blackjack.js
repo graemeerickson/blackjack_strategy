@@ -10,23 +10,27 @@ var playerCard2 = {};
 
 const calcDealerHand = () => {
    dealerCard = deck[Math.floor(deck.length * Math.random())];
-   dealerCard.played = true;
    console.log(`Dealer card: ${dealerCard.rank} of ${dealerCard.suit}`);
+}
+
+const getRemainingCards = () => {
+   let remainingDeck = deck.filter( (item) => {
+      if (item.played === false) {
+         return item;
+      }
+   });
+   return remainingDeck;
 }
 
 const calcPlayerHand = () => {
 
    // consider replacing with .filter
-   playerHand.playerCard1 = deck[Math.floor(deck.length * Math.random())]
-   while (playerHand.playerCard1.played !== false) {
-      playerHand.playerCard1 = deck[Math.floor(deck.length * Math.random())]
-   }
+   let remainingCards = getRemainingCards();
+   playerHand.playerCard1 = remainingCards[Math.floor(deck.length * Math.random())]
    playerHand.playerCard1.played = true;
 
-   playerHand.playerCard2 = deck[Math.floor(deck.length * Math.random())]
-   while (playerHand.playerCard2.played !== false) {
-      playerHand.playerCard2 = deck[Math.floor(deck.length * Math.random())]
-   }
+   remainingCards = getRemainingCards();
+   playerHand.playerCard2 = remainingCards[Math.floor(deck.length * Math.random())]
    playerHand.playerCard2.played = true;
 
    // check for an ace, else check for a pair, else hand is standard
