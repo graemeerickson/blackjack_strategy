@@ -44,12 +44,13 @@ const calcPlayerHand = () => {
 }
 
 const getCorrectMove = (dealerPlayerHandKey) => {
-   // find correct move by matching on dealerCard + playerHandSummary and getting correctMove.
    let correctMove = oddsTable[dealerPlayerHandKey].correctMove;
    console.log(`Correct move: ${correctMove}`);
+   return correctMove;
 }
 
-const determineCorrectMove = () => {
+const determineCorrectMove = (userDecision) => {
+   let dealerHandSummary;
    let playerHandSummary;
    switch (playerHand.playerHandType) {
       case 'standard':
@@ -70,14 +71,34 @@ const determineCorrectMove = () => {
    playerHand.sum = playerHandSummary;
    let dealerPlayerHandKey = dealerCard.rank + playerHandSummary;
    console.log(`dealerPlayerHandKey: ${dealerPlayerHandKey}`);
-   getCorrectMove(dealerPlayerHandKey);
+   let correctMove = getCorrectMove(dealerPlayerHandKey);
+   if (userDecision === correctMove) {
+      console.log("Correct decision");
+      $('#notify-user').append(`<h2>Correct decision</h2>`);
+   } else {
+      console.log("Wrong decision");
+      $('#notify-user').append(`<h2>Wrong decision</h2>`);
+   }
+}
+
+const getUserAction = (e) => {
+   let userDecision = e.target.value;
+   determineCorrectMove(userDecision);
+}
+
+const showBoard = () => {
+   $('#dealer-card').append(`<h2>Dealer card: ${dealerCard.rank}</h2>`);
+   $('#player-cards').append(`<h2>Player cards: ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank}</h2>`);
+   $('#player-actions').append(`<button value="H">HIT</button>`);
+   $('#player-actions').append(`<button value="D">DOUBLE</button>`);
+   $('#player-actions').append(`<button value="SP">SPLIT</button>`);
+   $('#player-actions').append(`<button value="S">STAND</button>`);
+   $('#player-actions').click(getUserAction);
 }
 
 $(document).ready(function() {
    // let newDeck = new deck; // initialize new deck
    calcDealerHand();
-   // showDealerHand();
    calcPlayerHand();
-   // showPlayerHand();
-   determineCorrectMove();
+   showBoard();
 });
