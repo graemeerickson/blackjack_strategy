@@ -10,21 +10,21 @@ var playerCard2 = {};
 
 const calcDealerHand = () => {
    dealerCard = deck[Math.floor(deck.length * Math.random())];
+   dealerCard.played = true;
    console.log(`Dealer card: ${dealerCard.rank} of ${dealerCard.suit}`);
 }
 
 const getRemainingCards = () => {
-   let remainingDeck = deck.filter( (item) => {
-      if (item.played === false) {
-         return item;
+   let remainingDeck = deck.filter( (card) => {
+      if (card.played === false) {
+         return card;
       }
    });
    return remainingDeck;
 }
 
 const calcPlayerHand = () => {
-
-   // consider replacing with .filter
+   console.log(deck);
    let remainingCards = getRemainingCards();
    playerHand.playerCard1 = remainingCards[Math.floor(deck.length * Math.random())]
    playerHand.playerCard1.played = true;
