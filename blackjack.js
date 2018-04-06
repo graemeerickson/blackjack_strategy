@@ -45,11 +45,11 @@ const getRemainingCards = () => {
 
 const calcPlayerHand = () => {
    let remainingCards = getRemainingCards();
-   playerHand.playerCard1 = remainingCards[Math.floor(deck.length * Math.random())]
+   playerHand.playerCard1 = remainingCards[Math.floor(remainingCards.length * Math.random())]
    playerHand.playerCard1.played = true;
 
    remainingCards = getRemainingCards();
-   playerHand.playerCard2 = remainingCards[Math.floor(deck.length * Math.random())]
+   playerHand.playerCard2 = remainingCards[Math.floor(remainingCards.length * Math.random())]
    playerHand.playerCard2.played = true;
 
    // check for an ace, else check for a pair, else hand is standard
