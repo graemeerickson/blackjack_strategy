@@ -747,5 +747,439 @@ const oddsTable = {
             dealer: 3,
             player: 'AA',
             correctMove: 'SP'
+         },
+// DEALER: 4 CARD
+   '45': {
+            handType: 'standard',
+            dealer: 4,
+            player: '5',
+            correctMove: 'H'
+         },
+   '46': {
+            handType: 'standard',
+            dealer: 4,
+            player: '6',
+            correctMove: 'H'
+         },
+   '47': {
+            handType: 'standard',
+            dealer: 4,
+            player: '7',
+            correctMove: 'H'
+         },
+   '48': {
+            handType: 'standard',
+            dealer: 4,
+            player: '8',
+            correctMove: 'H'
+         },
+   '49': {
+            handType: 'standard',
+            dealer: 4,
+            player: '9',
+            correctMove: 'D'
+         },
+   '410': {
+            handType: 'standard',
+            dealer: 4,
+            player: '10',
+            correctMove: 'D'
+         },
+   '411': {
+            handType: 'standard',
+            dealer: 4,
+            player: '11',
+            correctMove: 'D'
+         },
+   '412': {
+            handType: 'standard',
+            dealer: 4,
+            player: '12',
+            correctMove: 'S'
+         },
+   '413': {
+            handType: 'standard',
+            dealer: 4,
+            player: '13',
+            correctMove: 'S'
+         },
+   '414': {
+            handType: 'standard',
+            dealer: 4,
+            player: '14',
+            correctMove: 'S'
+         },
+   '415': {
+            handType: 'standard',
+            dealer: 4,
+            player: '15',
+            correctMove: 'S'
+         },
+   '416': {
+            handType: 'standard',
+            dealer: 4,
+            player: '16',
+            correctMove: 'S'
+         },
+   '417': {
+            handType: 'standard',
+            dealer: 4,
+            player: '17',
+            correctMove: 'S'
+         },
+   '418': {
+            handType: 'standard',
+            dealer: 4,
+            player: '18',
+            correctMove: 'S'
+         },
+   '419': {
+            handType: 'standard',
+            dealer: 4,
+            player: '19',
+            correctMove: 'S'
+         },
+   '420': {
+            handType: 'standard',
+            dealer: 4,
+            player: '20',
+            correctMove: 'S'
+         },
+   '421': {
+            handType: 'standard',
+            dealer: 4,
+            player: '21',
+            correctMove: 'S'
+         },
+   '4A2': {
+            handType: 'ace',
+            dealer: 4,
+            player: 'A2',
+            correctMove: 'H'
+         },
+   '4A3': {
+            handType: 'ace',
+            dealer: 4,
+            player: 'A3',
+            correctMove: 'H'
+         },
+   '4A4': {
+            handType: 'ace',
+            dealer: 4,
+            player: 'A4',
+            correctMove: 'D'
+         },
+   '4A5': {
+            handType: 'ace',
+            dealer: 4,
+            player: 'A5',
+            correctMove: 'D'
+         },
+   '4A6': {
+            handType: 'ace',
+            dealer: 4,
+            player: 'A6',
+            correctMove: 'D'
+         },
+   '4A7': {
+            handType: 'ace',
+            dealer: 4,
+            player: 'A7',
+            correctMove: 'D'
+         },
+   '4A8': {
+            handType: 'ace',
+            dealer: 4,
+            player: 'A8',
+            correctMove: 'S'
+         },
+   '4A9': {
+            handType: 'ace',
+            dealer: 4,
+            player: 'A9',
+            correctMove: 'S'
+         },
+   '4A10': {
+            handType: 'ace',
+            dealer: 4,
+            player: 'A10',
+            correctMove: 'S'
+         },
+   '422': {
+            handType: 'pair',
+            dealer: 4,
+            player: '22',
+            correctMove: 'SP'
+         },
+   '433': {
+            handType: 'pair',
+            dealer: 4,
+            player: '33',
+            correctMove: 'SP'
+         },
+   '444': {
+            handType: 'pair',
+            dealer: 4,
+            player: '44',
+            correctMove: 'H'
+         },
+   '455': {
+            handType: 'pair',
+            dealer: 4,
+            player: '55',
+            correctMove: 'D'
+         },
+   '466': {
+            handType: 'pair',
+            dealer: 4,
+            player: '66',
+            correctMove: 'SP'
+         },
+   '477': {
+            handType: 'pair',
+            dealer: 4,
+            player: '77',
+            correctMove: 'SP'
+         },
+   '488': {
+            handType: 'pair',
+            dealer: 4,
+            player: '88',
+            correctMove: 'SP'
+         },
+   '499': {
+            handType: 'pair',
+            dealer: 4,
+            player: '99',
+            correctMove: 'SP'
+         },
+   '41010': {
+            handType: 'pair',
+            dealer: 4,
+            player: '1010',
+            correctMove: 'S'
+         },
+   '4AA': {
+            handType: 'pair',
+            dealer: 4,
+            player: 'AA',
+            correctMove: 'SP'
+         },
+// DEALER 5 CARD
+   '55': {
+            handType: 'standard',
+            dealer: 5,
+            player: '5',
+            correctMove: 'H'
+         },
+   '56': {
+            handType: 'standard',
+            dealer: 5,
+            player: '6',
+            correctMove: 'H'
+         },
+   '57': {
+            handType: 'standard',
+            dealer: 5,
+            player: '7',
+            correctMove: 'H'
+         },
+   '58': {
+            handType: 'standard',
+            dealer: 5,
+            player: '8',
+            correctMove: 'H'
+         },
+   '59': {
+            handType: 'standard',
+            dealer: 5,
+            player: '9',
+            correctMove: 'D'
+         },
+   '510': {
+            handType: 'standard',
+            dealer: 5,
+            player: '10',
+            correctMove: 'D'
+         },
+   '511': {
+            handType: 'standard',
+            dealer: 5,
+            player: '11',
+            correctMove: 'D'
+         },
+   '512': {
+            handType: 'standard',
+            dealer: 5,
+            player: '12',
+            correctMove: 'S'
+         },
+   '513': {
+            handType: 'standard',
+            dealer: 5,
+            player: '13',
+            correctMove: 'S'
+         },
+   '514': {
+            handType: 'standard',
+            dealer: 5,
+            player: '14',
+            correctMove: 'S'
+         },
+   '515': {
+            handType: 'standard',
+            dealer: 5,
+            player: '15',
+            correctMove: 'S'
+         },
+   '516': {
+            handType: 'standard',
+            dealer: 5,
+            player: '16',
+            correctMove: 'S'
+         },
+   '517': {
+            handType: 'standard',
+            dealer: 5,
+            player: '17',
+            correctMove: 'S'
+         },
+   '518': {
+            handType: 'standard',
+            dealer: 5,
+            player: '18',
+            correctMove: 'S'
+         },
+   '519': {
+            handType: 'standard',
+            dealer: 5,
+            player: '19',
+            correctMove: 'S'
+         },
+   '520': {
+            handType: 'standard',
+            dealer: 5,
+            player: '20',
+            correctMove: 'S'
+         },
+   '521': {
+            handType: 'standard',
+            dealer: 5,
+            player: '21',
+            correctMove: 'S'
+         },
+   '5A2': {
+            handType: 'ace',
+            dealer: 5,
+            player: 'A2',
+            correctMove: 'D'
+         },
+   '5A3': {
+            handType: 'ace',
+            dealer: 5,
+            player: 'A3',
+            correctMove: 'D'
+         },
+   '5A4': {
+            handType: 'ace',
+            dealer: 5,
+            player: 'A4',
+            correctMove: 'D'
+         },
+   '5A5': {
+            handType: 'ace',
+            dealer: 5,
+            player: 'A5',
+            correctMove: 'D'
+         },
+   '5A6': {
+            handType: 'ace',
+            dealer: 5,
+            player: 'A6',
+            correctMove: 'D'
+         },
+   '5A7': {
+            handType: 'ace',
+            dealer: 5,
+            player: 'A7',
+            correctMove: 'D'
+         },
+   '5A8': {
+            handType: 'ace',
+            dealer: 5,
+            player: 'A8',
+            correctMove: 'S'
+         },
+   '5A9': {
+            handType: 'ace',
+            dealer: 5,
+            player: 'A9',
+            correctMove: 'S'
+         },
+   '5A10': {
+            handType: 'ace',
+            dealer: 5,
+            player: 'A10',
+            correctMove: 'S'
+         },
+   '522': {
+            handType: 'pair',
+            dealer: 5,
+            player: '22',
+            correctMove: 'SP'
+         },
+   '533': {
+            handType: 'pair',
+            dealer: 5,
+            player: '33',
+            correctMove: 'SP'
+         },
+   '544': {
+            handType: 'pair',
+            dealer: 5,
+            player: '44',
+            correctMove: 'SP'
+         },
+   '555': {
+            handType: 'pair',
+            dealer: 5,
+            player: '55',
+            correctMove: 'D'
+         },
+   '566': {
+            handType: 'pair',
+            dealer: 5,
+            player: '66',
+            correctMove: 'SP'
+         },
+   '577': {
+            handType: 'pair',
+            dealer: 5,
+            player: '77',
+            correctMove: 'SP'
+         },
+   '588': {
+            handType: 'pair',
+            dealer: 5,
+            player: '88',
+            correctMove: 'SP'
+         },
+   '599': {
+            handType: 'pair',
+            dealer: 5,
+            player: '99',
+            correctMove: 'SP'
+         },
+   '51010': {
+            handType: 'pair',
+            dealer: 5,
+            player: '1010',
+            correctMove: 'S'
+         },
+   '5AA': {
+            handType: 'pair',
+            dealer: 5,
+            player: 'AA',
+            correctMove: 'SP'
          }
 }
