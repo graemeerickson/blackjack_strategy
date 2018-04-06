@@ -7,6 +7,26 @@ var dealerCard = {};
 var playerHand = {};
 var playerCard1 = {};
 var playerCard2 = {};
+var userDecision;
+var correctMove;
+var moveHistory = [];
+var scoreboard = {
+   wins: 0,
+   losses: 0,
+   winPercentage: 0
+};
+
+const updateMoveHistory = () => {
+   let playerMoveSummary = {
+      dealerCard: dealerCard.rank,
+      playerCard1: playerHand.playerCard1.rank,
+      playerCard2: playerHand.playerCard2.rank,
+      userDecision: userDecision,
+      correctMove: correctMove
+   }
+   moveHistory.push(playerMoveSummary);
+   console.log(moveHistory);
+}
 
 const calcDealerHand = () => {
    dealerCard = deck[Math.floor(deck.length * Math.random())];
@@ -24,7 +44,6 @@ const getRemainingCards = () => {
 }
 
 const calcPlayerHand = () => {
-   console.log(deck);
    let remainingCards = getRemainingCards();
    playerHand.playerCard1 = remainingCards[Math.floor(deck.length * Math.random())]
    playerHand.playerCard1.played = true;
@@ -48,9 +67,22 @@ const calcPlayerHand = () => {
 }
 
 const getCorrectMove = (dealerPlayerHandKey) => {
-   let correctMove = oddsTable[dealerPlayerHandKey].correctMove;
+   correctMove = oddsTable[dealerPlayerHandKey].correctMove;
    console.log(`Correct move: ${correctMove}`);
    return correctMove;
+}
+
+const updateScoreboard = (result) => {
+   switch (result) {
+      case 'win':
+         scoreboard.wins += 1;
+         break;
+      case 'loss':
+         scoreboard.losses += 1;
+         break;
+   }
+   scoreboard.winPercentage = (scoreboard.wins / (scoreboard.wins + scoreboard.losses)) * 100 + '%';
+   console.log(scoreboard);
 }
 
 const determineCorrectMove = (userDecision) => {
@@ -77,16 +109,20 @@ const determineCorrectMove = (userDecision) => {
    console.log(`dealerPlayerHandKey: ${dealerPlayerHandKey}`);
    let correctMove = getCorrectMove(dealerPlayerHandKey);
    if (userDecision === correctMove) {
+      result = 'win';
       console.log("Correct decision");
       $('#notify-user').append(`<h2>Correct decision</h2>`);
    } else {
+      result = 'loss';
       console.log("Wrong decision");
       $('#notify-user').append(`<h2>Wrong decision</h2>`);
    }
+   updateScoreboard(result);
+   updateMoveHistory();
 }
 
 const getUserAction = (e) => {
-   let userDecision = e.target.value;
+   userDecision = e.target.value;
    determineCorrectMove(userDecision);
 }
 
