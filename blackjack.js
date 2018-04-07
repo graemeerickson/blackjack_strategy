@@ -15,6 +15,8 @@ var scoreboard = {
    losses: 0,
    winPercentage: 0
 };
+var gameplayStyle = 'all-cards';
+var myDeck;
 
 const updateMoveHistory = () => {
    let playerMoveSummary = {
@@ -29,6 +31,7 @@ const updateMoveHistory = () => {
 }
 
 const calcDealerHand = () => {
+   
    dealerCard = deck[Math.floor(deck.length * Math.random())];
    dealerCard.played = true;
    console.log(`Dealer card: ${dealerCard.rank} of ${dealerCard.suit}`);
@@ -36,21 +39,48 @@ const calcDealerHand = () => {
 
 const getRemainingCards = () => {
    let remainingDeck = deck.filter( (card) => {
-      if (card.played === false) {
-         return card;
-      }
+      return !card.played;
    });
+   console.log(remainingDeck);
    return remainingDeck;
 }
 
 const calcPlayerHand = () => {
    let remainingCards = getRemainingCards();
-   playerHand.playerCard1 = remainingCards[Math.floor(remainingCards.length * Math.random())]
-   playerHand.playerCard1.played = true;
-
-   remainingCards = getRemainingCards();
-   playerHand.playerCard2 = remainingCards[Math.floor(remainingCards.length * Math.random())]
-   playerHand.playerCard2.played = true;
+   switch (gameplayStyle) {
+      case 'all-cards':
+         playerHand.playerCard1 = remainingCards[Math.floor(remainingCards.length * Math.random())]
+         playerHand.playerCard1.played = true;
+         remainingCards = getRemainingCards();
+         playerHand.playerCard2 = remainingCards[Math.floor(remainingCards.length * Math.random())]
+         playerHand.playerCard2.played = true;
+         break;
+      case 'aces-only':
+         let aceCards = remainingCards.filter( (card) => {
+            return card.rank === 'A';
+         })
+         playerHand.playerCard1 = aceCards[Math.floor(aceCards.length * Math.random())]
+         playerHand.playerCard1.played = true;
+         remainingCards = getRemainingCards();
+         playerHand.playerCard2 = remainingCards[Math.floor(remainingCards.length * Math.random())]
+         playerHand.playerCard2.played = true;
+         break;
+      case 'pairs-only':
+         let potentialPair1 = remainingCards.filter( (card) => {
+            if (card.rank !== 'J' && card.rank !== 'Q' && card.rank !== 'K') {
+               return card;
+            }
+         })
+         playerHand.playerCard1 = potentialPair1[Math.floor(potentialPair1.length * Math.random())]
+         playerHand.playerCard1.played = true;
+         remainingCards = getRemainingCards();
+         let potentialPair2 = remainingCards.filter ( (card) => {
+            return card.rank === playerHand.playerCard1.rank;
+         })
+         playerHand.playerCard2 = potentialPair2[Math.floor(potentialPair2.length * Math.random())]
+         playerHand.playerCard2.played = true;
+         break;
+   };
 
    // check for an ace, else check for a pair, else hand is standard
    if ((playerHand.playerCard1.rank === 'A' || playerHand.playerCard2.rank === 'A') && (playerHand.playerCard1.rank !== playerHand.playerCard2.rank)) {
@@ -126,19 +156,39 @@ const getUserAction = (e) => {
    determineCorrectMove(userDecision);
 }
 
+const clearBoard = () => {
+   $('#dealer-card').empty();
+   $('#player-cards').empty();
+   $('#player-actions').empty();
+   // $('#new-hand').empty();
+}
+
 const showBoard = () => {
+   clearBoard();
    $('#dealer-card').append(`<h2>Dealer card: ${dealerCard.rank}</h2>`);
    $('#player-cards').append(`<h2>Player cards: ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank}</h2>`);
    $('#player-actions').append(`<button value="H">HIT</button>`);
    $('#player-actions').append(`<button value="D">DOUBLE</button>`);
    $('#player-actions').append(`<button value="SP">SPLIT</button>`);
    $('#player-actions').append(`<button value="S">STAND</button>`);
-   $('#player-actions').click(getUserAction);
+   // $('#new-hand').append(`<br><br><button value="new-hand">New hand</button>`);
+   // $('#new-hand').click();
 }
 
-$(document).ready(function() {
-   // let newDeck = new deck; // initialize new deck
+const initializeDeck = () => {
+   myDeck = new Deck();
+}
+
+const dealNewHand = () => {
+   gameplayStyle = $('input').val();
+   initializeDeck();
    calcDealerHand();
    calcPlayerHand();
    showBoard();
+}
+
+$(document).ready(function() {
+   dealNewHand();
+   $('input').click(dealNewHand);
+   $('#player-actions').click(getUserAction);
 });

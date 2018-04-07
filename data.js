@@ -1,3 +1,31 @@
+function Card(rank, suit, value, played) {
+   this.rank = rank;
+   this.suit = suit;
+   this.value = value;
+   this.played = played;
+}
+
+function Deck() {
+   this.ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+   this.suits = ['clubs','diamonds','hearts','spades'];
+   let cards = [];
+   let cardValue;
+
+   this.suits.forEach( (suitItem, suitIndex) => {
+      this.ranks.forEach( (rankItem, rankIndex) => {
+         if (rankItem === 'J' || rankItem === 'Q' || rankItem === 'K') {
+            cardValue = 10;
+         } else if (rankItem === 'A') {
+            cardValue = 1;
+         } else {
+            cardValue = Number(rankItem);
+         }
+         cards.push(new Card(rankItem, suitItem, cardValue, false));
+      })
+   });
+   return cards;
+}
+
 const deck = [
    {
       rank: '2',
