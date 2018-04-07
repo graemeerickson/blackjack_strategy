@@ -15,7 +15,7 @@ var scoreboard = {
    losses: 0,
    winPercentage: 0
 };
-var gameplayStyle = 'all-cards';
+var gameplayStyle;
 var myDeck;
 
 const updateMoveHistory = () => {
@@ -32,13 +32,13 @@ const updateMoveHistory = () => {
 
 const calcDealerHand = () => {
    
-   dealerCard = deck[Math.floor(deck.length * Math.random())];
+   dealerCard = myDeck[Math.floor(myDeck.length * Math.random())];
    dealerCard.played = true;
    console.log(`Dealer card: ${dealerCard.rank} of ${dealerCard.suit}`);
 }
 
 const getRemainingCards = () => {
-   let remainingDeck = deck.filter( (card) => {
+   let remainingDeck = myDeck.filter( (card) => {
       return !card.played;
    });
    console.log(remainingDeck);
@@ -179,8 +179,13 @@ const initializeDeck = () => {
    myDeck = new Deck();
 }
 
-const dealNewHand = () => {
-   gameplayStyle = $('input').val();
+const dealNewHand = (e) => {
+   if (e == null) {
+      gameplayStyle = 'all-cards';
+   } else {
+      gameplayStyle = e.target.value
+   }
+   console.log(gameplayStyle);
    initializeDeck();
    calcDealerHand();
    calcPlayerHand();
