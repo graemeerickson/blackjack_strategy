@@ -153,6 +153,7 @@ const determineCorrectMove = (userDecision) => {
 
 const getUserAction = (e) => {
    userDecision = e.target.value;
+   $('#player-actions').off('click');
    determineCorrectMove(userDecision);
 }
 
@@ -185,7 +186,6 @@ const dealNewHand = (e) => {
    } else {
       gameplayStyle = e.target.value
    }
-   console.log(gameplayStyle);
    initializeDeck();
    calcDealerHand();
    calcPlayerHand();
