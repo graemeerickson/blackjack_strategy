@@ -1,26 +1,16 @@
-// let canvas = document.getElementById("myCanvas");
-// let ctx = canvas.getContext("2d");
-// ctx.rect(50,50,100,150);
-// ctx.stroke();
-
-const DEFAULT_GAMEPLAY_STYLE = 'all-cards'
-var dealerCard = {};
-var playerHand = {};
-var playerCard1 = {};
-var playerCard2 = {};
-var userDecision;
-var correctMove;
-var moveHistory = [];
-var scoreboard;
-var gameplayStyle = DEFAULT_GAMEPLAY_STYLE;
-var myDeck;
+let dealerCard = {};
+let playerHand = {};
+let moveHistory = [];
+let scoreboard;
+let gameplayStyle;
+const DEFAULT_GAMEPLAY_STYLE = 'all-cards';
 
 const updateLocalStorageHistoryAndScorecard = () => {
    localStorage.setItem('storedBlackjackMoveHistory', JSON.stringify(moveHistory));
    localStorage.setItem('storedBlackjackScoreboard', JSON.stringify(scoreboard));
 }
 
-updateLocalStorageGameplayStyle = () => {
+const updateLocalStorageGameplayStyle = () => {
    localStorage.setItem('storedBlackjackGameplayStyle', JSON.stringify(gameplayStyle));
 };
 
@@ -45,7 +35,6 @@ const getLocalStorage = () => {
       gameplayStyle = DEFAULT_GAMEPLAY_STYLE;
    } else {
       gameplayStyle = JSON.parse(gameplayStyleStr);
-      console.log(gameplayStyle);
    };
    switch(gameplayStyle) {
       case 'all-cards':
@@ -60,7 +49,7 @@ const getLocalStorage = () => {
    };
 }
 
-const updateMoveHistory = () => {
+const updateMoveHistory = (dealerCard, playerHand, userDecision, correctMove) => {
    let playerMoveSummary = {
       dealerCard: dealerCard.rank,
       playerCard1: playerHand.playerCard1.rank,
@@ -72,13 +61,7 @@ const updateMoveHistory = () => {
    console.log(moveHistory);
 }
 
-const calcDealerHand = () => {
-   dealerCard = myDeck[Math.floor(myDeck.length * Math.random())];
-   dealerCard.played = true;
-   console.log(`Dealer card: ${dealerCard.rank} of ${dealerCard.suit}`);
-}
-
-const getRemainingCards = () => {
+const getRemainingCards = (myDeck) => {
    let remainingDeck = myDeck.filter( (card) => {
       return !card.played;
    });
@@ -87,7 +70,6 @@ const getRemainingCards = () => {
 
 const categorizeHand = () => {
    // check for an ace, else check for a pair, else hand is standard
-   console.log(playerHand);
    if ((playerHand.playerCard1.rank === 'A' || playerHand.playerCard2.rank === 'A') && (playerHand.playerCard1.rank !== playerHand.playerCard2.rank)) {
       return 'ace';
    } else if ((playerHand.playerCard1.rank === playerHand.playerCard2.rank) && (playerHand.playerCard1.value === playerHand.playerCard2.value) && ((typeof playerHand.playerCard1.rank === 'number' && typeof playerHand.playerCard2.rank === 'number') || playerHand.playerCard1.rank === 'A')) {
@@ -97,14 +79,20 @@ const categorizeHand = () => {
    }
 }
 
-const calcPlayerHand = () => {
-   let remainingCards = getRemainingCards();
-   console.log(gameplayStyle);
+const calcDealerHand = (myDeck) => {
+   dealerCard = myDeck[Math.floor(myDeck.length * Math.random())];
+   dealerCard.played = true;
+   console.log(`Dealer card: ${dealerCard.rank} of ${dealerCard.suit}`);
+   return dealerCard;
+}
+
+const calcPlayerHand = (myDeck) => {
+   let remainingCards = getRemainingCards(myDeck);
    switch (gameplayStyle) {
       case 'all-cards':
          playerHand.playerCard1 = remainingCards[Math.floor(remainingCards.length * Math.random())]
          playerHand.playerCard1.played = true;
-         remainingCards = getRemainingCards();
+         remainingCards = getRemainingCards(myDeck);
          playerHand.playerCard2 = remainingCards[Math.floor(remainingCards.length * Math.random())]
          playerHand.playerCard2.played = true;
          break;
@@ -114,7 +102,7 @@ const calcPlayerHand = () => {
          })
          playerHand.playerCard1 = aceCards[Math.floor(aceCards.length * Math.random())]
          playerHand.playerCard1.played = true;
-         remainingCards = getRemainingCards();
+         remainingCards = getRemainingCards(myDeck);
          playerHand.playerCard2 = remainingCards[Math.floor(remainingCards.length * Math.random())]
          playerHand.playerCard2.played = true;
          break;
@@ -126,7 +114,7 @@ const calcPlayerHand = () => {
          })
          playerHand.playerCard1 = potentialPair1[Math.floor(potentialPair1.length * Math.random())]
          playerHand.playerCard1.played = true;
-         remainingCards = getRemainingCards();
+         remainingCards = getRemainingCards(myDeck);
          let potentialPair2 = remainingCards.filter ( (card) => {
             return card.rank === playerHand.playerCard1.rank;
          })
@@ -156,7 +144,7 @@ const updateScoreboard = (result) => {
 }
 
 const getCorrectMove = (dealerPlayerHandKey) => {
-   correctMove = oddsTable[dealerPlayerHandKey].correctMove;
+   let correctMove = oddsTable[dealerPlayerHandKey].correctMove;
    console.log(`Correct move: ${correctMove}`);
    return correctMove;
 }
@@ -178,7 +166,6 @@ const determineCorrectMove = (userDecision) => {
          break;
       case 'pair':
          playerHandSummary = String(playerHand.playerCard1.rank) + String(playerHand.playerCard2.rank);
-         console.log(`playerHandSummary: ${playerHandSummary}`);
          break;   
    }
    playerHand.sum = playerHandSummary;
@@ -195,14 +182,24 @@ const determineCorrectMove = (userDecision) => {
       $('#notify-user').append(`<h2>Wrong decision. ${correctMove} on ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank} with Dealer ${dealerCard.rank}.</h2>`);
    }
    updateScoreboard(result);
-   updateMoveHistory();
+   updateMoveHistory(dealerCard, playerHand, userDecision, correctMove);
    updateLocalStorageHistoryAndScorecard();
+}
+
+const changeGameplayStyle = (e) => {
+   gameplayStyle = e.target.value;
+   updateLocalStorageGameplayStyle();
+   dealNewHand();
 }
 
 const getUserAction = (e) => {
    userDecision = e.target.value;
    $('#player-actions').off('click');  
    determineCorrectMove(userDecision);
+}
+
+const initializeDeck = () => {
+   return new Deck();
 }
 
 const clearBoard = () => {
@@ -230,20 +227,10 @@ const prepareBoard = () => {
    showBoard();
 }
 
-const initializeDeck = () => {
-   myDeck = new Deck();
-}
-
-const changeGameplayStyle = (e) => {
-   gameplayStyle = e.target.value;
-   updateLocalStorageGameplayStyle();
-   dealNewHand();
-}
-
 const dealNewHand = () => {
-   initializeDeck();
-   calcDealerHand();
-   calcPlayerHand();
+   let myDeck = initializeDeck();
+   calcDealerHand(myDeck);
+   calcPlayerHand(myDeck);
    prepareBoard();
    $('#new-hand').click(dealNewHand);
    $('#player-actions').click(getUserAction);
