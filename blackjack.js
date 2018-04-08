@@ -3,6 +3,7 @@
 // ctx.rect(50,50,100,150);
 // ctx.stroke();
 
+const DEFAULT_GAMEPLAY_STYLE = 'all-cards'
 var dealerCard = {};
 var playerHand = {};
 var playerCard1 = {};
@@ -15,8 +16,43 @@ var scoreboard = {
    losses: 0,
    winPercentage: 0
 };
-var gameplayStyle = 'all-cards';
+var gameplayStyle = DEFAULT_GAMEPLAY_STYLE;
 var myDeck;
+
+const updateLocalStorage = () => {
+   localStorage.setItem('storedBlackjackMoveHistory', JSON.stringify(moveHistory));
+   localStorage.setItem('storedBlackjackScoreboard', JSON.stringify(scoreboard));
+   localStorage.setItem('storedBlackjackGameplayStyle'), JSON.stringify(gameplayStyle);
+}
+
+const getLocalStorage = () => {
+   let moveHistoryStr = localStorage.getItem('storedBlackjackMoveHistory');
+   moveHistory = JSON.parse(moveHistoryStr);
+   if (moveHistoryStr === null) {
+      moveHistory = [];
+   } else {
+      moveHistory = JSON.parse(moveHistoryStr);
+   };
+
+   let scoreboardStr = localStorage.getItem('storedBlackjackScoreboard');
+   if (scoreboardStr === null) {
+      scoreboard = {
+         wins: 0,
+         losses: 0,
+         winPercentage: 0
+      }
+   } else {
+      scoreboard = JSON.parse(scoreboardStr);
+   };
+
+   let gameplayStyleStr = localStorage.getItem('storedBlackjackGameplayStyle');
+   if (gameplayStyleStr === null) {
+      gameplayStyle = DEFAULT_GAMEPLAY_STYLE;
+   } else {
+      gameplayStyle = JSON.parse(gameplayStyleStr);
+      console.log(gameplayStyle);
+   };
+}
 
 const updateMoveHistory = () => {
    let playerMoveSummary = {
@@ -45,6 +81,7 @@ const getRemainingCards = () => {
 
 const categorizeHand = () => {
    // check for an ace, else check for a pair, else hand is standard
+   console.log(playerHand);
    if ((playerHand.playerCard1.rank === 'A' || playerHand.playerCard2.rank === 'A') && (playerHand.playerCard1.rank !== playerHand.playerCard2.rank)) {
       return 'ace';
    } else if ((playerHand.playerCard1.rank === playerHand.playerCard2.rank) && (playerHand.playerCard1.value === playerHand.playerCard2.value) && ((typeof playerHand.playerCard1.rank === 'number' && typeof playerHand.playerCard2.rank === 'number') || playerHand.playerCard1.rank === 'A')) {
@@ -56,6 +93,7 @@ const categorizeHand = () => {
 
 const calcPlayerHand = () => {
    let remainingCards = getRemainingCards();
+   console.log(gameplayStyle);
    switch (gameplayStyle) {
       case 'all-cards':
          playerHand.playerCard1 = remainingCards[Math.floor(remainingCards.length * Math.random())]
@@ -107,7 +145,7 @@ const updateScoreboard = (result) => {
          scoreboard.losses += 1;
          break;
    }
-   scoreboard.winPercentage = (scoreboard.wins / (scoreboard.wins + scoreboard.losses)) * 100 + '%';
+   scoreboard.winPercentage = Math.round((scoreboard.wins / (scoreboard.wins + scoreboard.losses)) * 100) * 100 / 100 + '%';
    console.log(scoreboard);
 }
 
@@ -148,10 +186,11 @@ const determineCorrectMove = (userDecision) => {
    } else {
       result = 'loss';
       console.log("Wrong decision");
-      $('#notify-user').append(`<h2>Wrong decision. ${correctMove} on ${playerHand.playerCard1.rank} ${playerHand.playerCard1.rank} with dealer ${dealerCard.rank}.</h2>`);
+      $('#notify-user').append(`<h2>Wrong decision. ${correctMove} on ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank} with Dealer ${dealerCard.rank}.</h2>`);
    }
    updateScoreboard(result);
    updateMoveHistory();
+   updateLocalStorage();
 }
 
 const getUserAction = (e) => {
@@ -173,10 +212,10 @@ const clearBoard = () => {
 const showBoard = () => {
    $('#dealer-card').append(`<h2>Dealer card: ${dealerCard.rank}</h2>`);
    $('#player-cards').append(`<h2>Player cards: ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank}</h2>`);
-   $('#player-actions').append(`<button value="H">HIT</button>`);
-   $('#player-actions').append(`<button value="D">DOUBLE</button>`);
-   $('#player-actions').append(`<button value="SP">SPLIT</button>`);
-   $('#player-actions').append(`<button value="S">STAND</button>`);
+   $('#player-actions').append(`<button value="Hit">HIT</button>`);
+   $('#player-actions').append(`<button value="Double">DOUBLE</button>`);
+   $('#player-actions').append(`<button value="Split">SPLIT</button>`);
+   $('#player-actions').append(`<button value="Stand">STAND</button>`);
    $('#new-hand').append(`<br><br><button value="new-hand">New hand</button>`);
 }
 
@@ -204,6 +243,7 @@ const dealNewHand = () => {
 }
 
 $(document).ready(function() {
+   getLocalStorage();
    dealNewHand();
    $('input').click(changeGameplayStyle);
    $('#new-hand').click(dealNewHand);
