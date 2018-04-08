@@ -58,7 +58,6 @@ const updateMoveHistory = (dealerCard, playerHand, userDecision, correctMove) =>
       correctMove: correctMove
    }
    moveHistory.push(playerMoveSummary);
-   console.log(moveHistory);
 }
 
 const getRemainingCards = (myDeck) => {
@@ -69,7 +68,6 @@ const getRemainingCards = (myDeck) => {
          return !card.played && (card.value + playerHand.playerCard1.value !== 21);
       }
    });
-   console.log(remainingDeck);
    return remainingDeck;
 }
 
@@ -87,7 +85,6 @@ const categorizeHand = () => {
 const calcDealerHand = (myDeck) => {
    dealerCard = myDeck[Math.floor(myDeck.length * Math.random())];
    dealerCard.played = true;
-   console.log(`Dealer card: ${dealerCard.rank} of ${dealerCard.suit}`);
    return dealerCard;
 }
 
@@ -129,10 +126,6 @@ const calcPlayerHand = (myDeck) => {
    };
 
    playerHand.playerHandType = categorizeHand();
-
-   console.log(`Player card 1: ${playerHand.playerCard1.rank} of ${playerHand.playerCard1.suit}`);
-   console.log(`Player card 2: ${playerHand.playerCard2.rank} of ${playerHand.playerCard2.suit}`);
-   console.log(`Player hand type: ${playerHand.playerHandType}`);
 }
 
 const updateScoreboard = (result) => {
@@ -145,12 +138,10 @@ const updateScoreboard = (result) => {
          break;
    }
    scoreboard.winPercentage = Math.round((scoreboard.wins / (scoreboard.wins + scoreboard.losses)) * 100) * 100 / 100 + '%';
-   console.log(scoreboard);
 }
 
 const getCorrectMove = (dealerPlayerHandKey) => {
    let correctMove = oddsTable[dealerPlayerHandKey].correctMove;
-   console.log(`Correct move: ${correctMove}`);
    return correctMove;
 }
 
@@ -175,15 +166,12 @@ const determineCorrectMove = (userDecision) => {
    }
    playerHand.sum = playerHandSummary;
    let dealerPlayerHandKey = String(dealerCard.rank) + playerHandSummary;
-   console.log(`dealerPlayerHandKey: ${dealerPlayerHandKey}`);
    let correctMove = getCorrectMove(dealerPlayerHandKey);
    if (userDecision === correctMove) {
       result = 'win';
-      console.log("Correct decision");
       $('#notify-user').append(`<h2>Correct decision</h2>`);
    } else {
       result = 'loss';
-      console.log("Wrong decision");
       $('#notify-user').append(`<h2>Wrong decision. ${correctMove} on ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank} with Dealer ${dealerCard.rank}.</h2>`);
    }
    updateScoreboard(result);
