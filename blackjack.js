@@ -240,5 +240,4 @@ $(document).ready(function() {
    getLocalStorage();
    dealNewHand();
    $('input').click(changeGameplayStyle);
-   $('#new-hand').click(dealNewHand);
 });
