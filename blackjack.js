@@ -63,8 +63,13 @@ const updateMoveHistory = (dealerCard, playerHand, userDecision, correctMove) =>
 
 const getRemainingCards = (myDeck) => {
    let remainingDeck = myDeck.filter( (card) => {
-      return !card.played;
+      if (playerHand.playerCard1 == null) {
+         return !card.played
+      } else {
+         return !card.played && (card.value + playerHand.playerCard1.value !== 21);
+      }
    });
+   console.log(remainingDeck);
    return remainingDeck;
 }
 

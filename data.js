@@ -16,7 +16,7 @@ function Deck() {
          if (rankItem === 'J' || rankItem === 'Q' || rankItem === 'K') {
             cardValue = 10;
          } else if (rankItem === 'A') {
-            cardValue = 1;
+            cardValue = 11;
          } else {
             cardValue = Number(rankItem);
          }
