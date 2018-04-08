@@ -15,11 +15,14 @@ var scoreboard;
 var gameplayStyle = DEFAULT_GAMEPLAY_STYLE;
 var myDeck;
 
-const updateLocalStorage = () => {
+const updateLocalStorageHistoryAndScorecard = () => {
    localStorage.setItem('storedBlackjackMoveHistory', JSON.stringify(moveHistory));
    localStorage.setItem('storedBlackjackScoreboard', JSON.stringify(scoreboard));
-   localStorage.setItem('storedBlackjackGameplayStyle'), JSON.stringify(gameplayStyle);
 }
+
+updateLocalStorageGameplayStyle = () => {
+   localStorage.setItem('storedBlackjackGameplayStyle', JSON.stringify(gameplayStyle));
+};
 
 const getLocalStorage = () => {
    let moveHistoryStr = localStorage.getItem('storedBlackjackMoveHistory');
@@ -43,6 +46,17 @@ const getLocalStorage = () => {
    } else {
       gameplayStyle = JSON.parse(gameplayStyleStr);
       console.log(gameplayStyle);
+   };
+   switch(gameplayStyle) {
+      case 'all-cards':
+         $('#all-cards').prop('checked',  true);
+         break;
+      case 'aces-only':
+         $('#aces-only').prop('checked',  true);
+         break;
+      case 'pairs-only':
+         $('#pairs-only').prop('checked',  true);
+         break;
    };
 }
 
@@ -182,12 +196,12 @@ const determineCorrectMove = (userDecision) => {
    }
    updateScoreboard(result);
    updateMoveHistory();
-   updateLocalStorage();
+   updateLocalStorageHistoryAndScorecard();
 }
 
 const getUserAction = (e) => {
    userDecision = e.target.value;
-   $('#player-actions').off('click');
+   $('#player-actions').off('click');  
    determineCorrectMove(userDecision);
 }
 
@@ -222,6 +236,7 @@ const initializeDeck = () => {
 
 const changeGameplayStyle = (e) => {
    gameplayStyle = e.target.value;
+   updateLocalStorageGameplayStyle();
    dealNewHand();
 }
 
