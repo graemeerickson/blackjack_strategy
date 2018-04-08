@@ -11,11 +11,7 @@ var playerCard2 = {};
 var userDecision;
 var correctMove;
 var moveHistory = [];
-var scoreboard = {
-   wins: 0,
-   losses: 0,
-   winPercentage: 0
-};
+var scoreboard;
 var gameplayStyle = DEFAULT_GAMEPLAY_STYLE;
 var myDeck;
 
@@ -36,11 +32,7 @@ const getLocalStorage = () => {
 
    let scoreboardStr = localStorage.getItem('storedBlackjackScoreboard');
    if (scoreboardStr === null) {
-      scoreboard = {
-         wins: 0,
-         losses: 0,
-         winPercentage: 0
-      }
+      scoreboard = new Scorecard(0, 0, 0);
    } else {
       scoreboard = JSON.parse(scoreboardStr);
    };
