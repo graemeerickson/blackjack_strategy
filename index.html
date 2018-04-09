@@ -1,6 +1,13 @@
 <!DOCTYPE html>
+<!--[if lte IE 6]><html class="preIE7 preIE8 preIE9"><![endif]-->
+<!--[if IE 7]><html class="preIE8 preIE9"><![endif]-->
+<!--[if IE 8]><html class="preIE9"><![endif]-->
+<!--[if gte IE 9]><!--><!--<![endif]-->
 <html>
 <head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+   <meta name="viewport" content="width=device-width,initial-scale=1">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
    <link rel="stylesheet" type="text/css" href="style.css">
@@ -25,18 +32,22 @@
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                <li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gameplay <span class="caret"></span></a>
+                  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Game Mode <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                      <li class="gameplay-style-dropdown" id="all-cards"><a>All cards</a></li>
                      <li class="gameplay-style-dropdown" id="aces-only"><a>Aces only</a></li>
                      <li class="gameplay-style-dropdown" id="pairs-only"><a>Pairs only</a></li>
                   </ul>
                </li>
-               <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-               <li><a href="#">Link</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-center">
+               <li><p class="navbar-text" id="scorecard-label">Score:</p></li>
+               <li><p class="navbar-text" id="scorecard-wins"></p></li>
+               <li><p class="navbar-text" id="scorecard-losses"></p></li>
+               <li><p class="navbar-text" id="scorecard-percentage"></p></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-               <li><a href="#">Link</a></li>
+               <li><a>Instructions</a></li>
             </ul>
          </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -45,6 +56,7 @@
    <div id="dealer-card"></div>
    <div id="player-cards"></div>
    <div id="player-actions"></div>
+   <br><br>
    <div id="new-hand"></div>
    <div id="notify-user"></div>
 

@@ -21,6 +21,10 @@ const getLocalStorage = () => {
    let scoreboardStr = localStorage.getItem('storedBlackjackScoreboard');
    scoreboardStr === null ? scoreboard = new Scorecard(0, 0, 0) : scoreboard = JSON.parse(scoreboardStr);
 
+   $('#scorecard-wins').text(scoreboard.wins);
+   $('#scorecard-losses').text(scoreboard.losses);
+   $('#scorecard-percentage').text(scoreboard.winPercentage);
+
    let gameplayStyleStr = localStorage.getItem('storedBlackjackGameplayStyle');
    gameplayStyleStr === null ? gameplayStyle = DEFAULT_GAMEPLAY_STYLE : gameplayStyle = JSON.parse(gameplayStyleStr);
 
@@ -127,6 +131,9 @@ const updateScoreboard = (result) => {
          break;
    }
    scoreboard.winPercentage = Math.round((scoreboard.wins / (scoreboard.wins + scoreboard.losses)) * 100) * 100 / 100 + '%';
+   $('#scorecard-wins').text(scoreboard.wins);
+   $('#scorecard-losses').text(scoreboard.losses);
+   $('#scorecard-percentage').text(scoreboard.winPercentage);
 }
 
 const getCorrectMove = (dealerPlayerHandKey) => {
@@ -215,7 +222,7 @@ const showBoard = () => {
    $('#player-actions').append(`<button value="Double">DOUBLE</button>`);
    $('#player-actions').append(`<button value="Split">SPLIT</button>`);
    $('#player-actions').append(`<button value="Stand">STAND</button>`);
-   $('#new-hand').append(`<br><br><button value="new-hand">New hand</button>`);
+   $('#new-hand').append(`<button value="new-hand">New hand</button>`);
 }
 
 const prepareBoard = () => {

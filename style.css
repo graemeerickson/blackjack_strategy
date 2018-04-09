@@ -1,15 +1,33 @@
 body {
    font-family: 'Roboto', sans-serif;
 }
-
+p {
+   cursor: default;
+}
 .gameplay-style-dropdown {
    cursor: pointer;
 }
-
 .active-tick a::after {
    content: '\f00c'; /* http://fontawesome.io/3.2.1/icon/ok/ */
    font-family: 'FontAwesome';
    float: right;
+}
+#scorecard-wins {
+   color: green;
+   font-weight: bold;
+   margin-left: 5px;
+}
+#scorecard-losses {
+   color: red;
+   font-weight: bold;
+   margin-left: 5px;
+}
+#scorecard-percentage {
+   font-weight: bold;
+   margin-left: 5px;
+}
+#new-hand {
+   display: inline;
 }
 
 @media (min-width: 979px) {
