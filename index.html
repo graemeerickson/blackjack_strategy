@@ -4,6 +4,7 @@
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
    <link rel="stylesheet" type="text/css" href="style.css">
+   <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700" rel="stylesheet">
    <title>Blackjack Strategy</title>
 </head>
 <body>
@@ -24,11 +25,11 @@
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gameplay <span class="caret"></span></a>
+                  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gameplay <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                     <li class="gameplay-style-dropdown"><a>All cards</a></li>
-                     <li class="gameplay-style-dropdown"><a>Aces only</a></li>
-                     <li class="gameplay-style-dropdown"><a>Pairs only</a></li>
+                     <li class="gameplay-style-dropdown" id="all-cards"><a>All cards</a></li>
+                     <li class="gameplay-style-dropdown" id="aces-only"><a>Aces only</a></li>
+                     <li class="gameplay-style-dropdown" id="pairs-only"><a>Pairs only</a></li>
                   </ul>
                </li>
                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
