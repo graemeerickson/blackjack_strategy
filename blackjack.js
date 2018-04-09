@@ -26,13 +26,13 @@ const getLocalStorage = () => {
 
    switch(gameplayStyle) {
       case 'all-cards':
-         $('#all-cards').prop('checked',  true);
+         $('#all-cards').addClass('active-tick').siblings().removeClass('active-tick');
          break;
       case 'aces-only':
-         $('#aces-only').prop('checked',  true);
+         $('#aces-only').addClass('active-tick').siblings().removeClass('active-tick');
          break;
       case 'pairs-only':
-         $('#pairs-only').prop('checked',  true);
+         $('#pairs-only').addClass('active-tick').siblings().removeClass('active-tick');
          break;
    };
 }
