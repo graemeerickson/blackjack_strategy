@@ -16,26 +16,14 @@ const updateLocalStorageGameplayStyle = () => {
 
 const getLocalStorage = () => {
    let moveHistoryStr = localStorage.getItem('storedBlackjackMoveHistory');
-   moveHistory = JSON.parse(moveHistoryStr);
-   if (moveHistoryStr === null) {
-      moveHistory = [];
-   } else {
-      moveHistory = JSON.parse(moveHistoryStr);
-   };
+   moveHistoryStr === null ? moveHistory = [] : moveHistory = JSON.parse(moveHistoryStr);
 
    let scoreboardStr = localStorage.getItem('storedBlackjackScoreboard');
-   if (scoreboardStr === null) {
-      scoreboard = new Scorecard(0, 0, 0);
-   } else {
-      scoreboard = JSON.parse(scoreboardStr);
-   };
+   scoreboardStr === null ? scoreboard = new Scorecard(0, 0, 0) : scoreboard = JSON.parse(scoreboardStr);
 
    let gameplayStyleStr = localStorage.getItem('storedBlackjackGameplayStyle');
-   if (gameplayStyleStr === null) {
-      gameplayStyle = DEFAULT_GAMEPLAY_STYLE;
-   } else {
-      gameplayStyle = JSON.parse(gameplayStyleStr);
-   };
+   gameplayStyleStr === null ? gameplayStyle = DEFAULT_GAMEPLAY_STYLE : gameplayStyle = JSON.parse(gameplayStyleStr);
+
    switch(gameplayStyle) {
       case 'all-cards':
          $('#all-cards').prop('checked',  true);
@@ -49,13 +37,15 @@ const getLocalStorage = () => {
    };
 }
 
-const updateMoveHistory = (dealerCard, playerHand, userDecision, correctMove) => {
+const updateMoveHistory = (dealerCard, playerHand, userDecision, correctMove, playerHandType, result) => {
    let playerMoveSummary = {
       dealerCard: dealerCard.rank,
       playerCard1: playerHand.playerCard1.rank,
       playerCard2: playerHand.playerCard2.rank,
       userDecision: userDecision,
-      correctMove: correctMove
+      correctMove: correctMove,
+      handType: playerHandType,
+      result: result
    }
    moveHistory.push(playerMoveSummary);
 }
@@ -74,11 +64,11 @@ const getRemainingCards = (myDeck) => {
 const categorizeHand = () => {
    // check for an ace, else check for a pair, else hand is standard
    if ((playerHand.playerCard1.rank === 'A' || playerHand.playerCard2.rank === 'A') && (playerHand.playerCard1.rank !== playerHand.playerCard2.rank)) {
-      return 'ace';
+      return 'Ace';
    } else if ((playerHand.playerCard1.rank === playerHand.playerCard2.rank) && (playerHand.playerCard1.value === playerHand.playerCard2.value) && ((typeof playerHand.playerCard1.rank === 'number' && typeof playerHand.playerCard2.rank === 'number') || playerHand.playerCard1.rank === 'A')) {
-      return 'pair';
+      return 'Pair';
    } else {
-      return playerHand.playerHandType = 'standard';
+      return 'Standard';
    }
 }
 
@@ -124,16 +114,15 @@ const calcPlayerHand = (myDeck) => {
          playerHand.playerCard2.played = true;
          break;
    };
-
    playerHand.playerHandType = categorizeHand();
 }
 
 const updateScoreboard = (result) => {
    switch (result) {
-      case 'win':
+      case 'Win':
          scoreboard.wins += 1;
          break;
-      case 'loss':
+      case 'Loss':
          scoreboard.losses += 1;
          break;
    }
@@ -145,42 +134,56 @@ const getCorrectMove = (dealerPlayerHandKey) => {
    return correctMove;
 }
 
-const determineCorrectMove = (userDecision) => {
-   let dealerHandSummary;
-   let playerHandSummary;
+const summarizePlayerHand = () => {
    switch (playerHand.playerHandType) {
-      case 'standard':
-         playerHandSummary = playerHand.playerCard1.value + playerHand.playerCard2.value;
+      case 'Standard':
+         return playerHand.playerCard1.value + playerHand.playerCard2.value;
          break;
-      case 'ace':
+      case 'Ace':
          // ensure the ace is always the first one listed in playerHandSummary
          if (playerHand.playerCard1.rank === 'A') {
-            playerHandSummary = playerHand.playerCard1.rank + playerHand.playerCard2.value;
+            return playerHand.playerCard1.rank + playerHand.playerCard2.value;
          } else {
-            playerHandSummary = playerHand.playerCard2.rank + playerHand.playerCard1.value;
+            return playerHand.playerCard2.rank + playerHand.playerCard1.value;
          }
          break;
-      case 'pair':
-         playerHandSummary = String(playerHand.playerCard1.rank) + String(playerHand.playerCard2.rank);
+      case 'Pair':
+         return String(playerHand.playerCard1.rank) + String(playerHand.playerCard2.rank);
          break;   
-   }
+   };
+};
+
+const determineCorrectMove = (userDecision) => {
+   let dealerHandSummary;
+   let playerHandSummary = summarizePlayerHand();
    playerHand.sum = playerHandSummary;
    let dealerPlayerHandKey = String(dealerCard.rank) + playerHandSummary;
    let correctMove = getCorrectMove(dealerPlayerHandKey);
    if (userDecision === correctMove) {
-      result = 'win';
-      $('#notify-user').append(`<h2>Correct decision</h2>`);
+      result = 'Win';
+      $('#notify-user').append(`<h2>Correct - ${correctMove} with ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank} and dealer ${dealerCard.rank}</h2>`);
    } else {
-      result = 'loss';
-      $('#notify-user').append(`<h2>Wrong decision. ${correctMove} on ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank} with Dealer ${dealerCard.rank}.</h2>`);
+      result = 'Loss';
+      $('#notify-user').append(`<h2>Wrong - ${correctMove} with ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank} and dealer ${dealerCard.rank}.</h2>`);
    }
    updateScoreboard(result);
-   updateMoveHistory(dealerCard, playerHand, userDecision, correctMove);
+   updateMoveHistory(dealerCard, playerHand, userDecision, correctMove, playerHand.playerHandType, result);
    updateLocalStorageHistoryAndScorecard();
 }
 
 const changeGameplayStyle = (e) => {
-   gameplayStyle = e.target.value;
+   let gameplayStyleText = e.target.text;
+   switch (gameplayStyleText) {
+      case 'All cards':
+         gameplayStyle = 'all-cards';
+         break;
+      case 'Aces only':
+         gameplayStyle = 'aces-only';
+         break;
+      case 'Pairs only':
+         gameplayStyle = 'pairs-only';
+         break;
+   }
    updateLocalStorageGameplayStyle();
    dealNewHand();
 }
@@ -232,5 +235,9 @@ const dealNewHand = () => {
 $(document).ready(function() {
    getLocalStorage();
    dealNewHand();
-   $('input').click(changeGameplayStyle);
+   // $('input').click(changeGameplayStyle);
+   $('.gameplay-style-dropdown').click(changeGameplayStyle);
+   $('.gameplay-style-dropdown').click(function(e) {
+      $(this).addClass('active-tick').siblings().removeClass('active-tick');
+   });
 });

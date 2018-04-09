@@ -1,4 +1,15 @@
-canvas {
-   height: 600px;
-   width: 600px;
+.gameplay-style-dropdown {
+   cursor: pointer;
+}
+
+.active-tick a::after {
+   content: '\f00c'; /* http://fontawesome.io/3.2.1/icon/ok/ */
+   font-family: 'FontAwesome';
+   float: right;
+}
+
+@media (min-width: 979px) {
+   ul.nav li.dropdown:hover > ul.dropdown-menu {
+      display: block;
+   }
 }
