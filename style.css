@@ -4,6 +4,16 @@ body {
 p {
    cursor: default;
 }
+h2 {
+   cursor: default;
+}
+canvas {
+   width: 100%;
+   height: auto;
+}
+.container {
+   text-align: center;
+}
 .gameplay-style-dropdown {
    cursor: pointer;
 }
@@ -11,6 +21,9 @@ p {
    content: '\f00c'; /* http://fontawesome.io/3.2.1/icon/ok/ */
    font-family: 'FontAwesome';
    float: right;
+}
+#dealer {
+   height: 5%;
 }
 #scorecard-wins {
    color: green;
@@ -30,7 +43,7 @@ p {
    display: inline;
 }
 
-@media (min-width: 979px) {
+@media (min-width: 768px) {
    ul.nav li.dropdown:hover > ul.dropdown-menu {
       display: block;
    }

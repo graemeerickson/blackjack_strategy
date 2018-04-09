@@ -4,6 +4,8 @@ let moveHistory = [];
 let scoreboard;
 let gameplayStyle;
 const DEFAULT_GAMEPLAY_STYLE = 'all-cards';
+const CARD_WIDTH = 50;
+const CARD_HEIGHT = 75;
 
 const updateLocalStorageHistoryAndScorecard = () => {
    localStorage.setItem('storedBlackjackMoveHistory', JSON.stringify(moveHistory));
@@ -217,12 +219,30 @@ const clearBoard = () => {
 
 const showBoard = () => {
    $('#dealer-card').append(`<h2>Dealer card: ${dealerCard.rank}</h2>`);
+   let canvasDealerCard=document.getElementById("canvas-dealer-card");
+   let ctx = canvasDealerCard.getContext("2d");
+   let screenMidpoint = $("#canvas-dealer-card").parent().width() / 2 - CARD_WIDTH;
+   let rectCoordinates = {
+      "x": screenMidpoint,
+      "y": 0,
+      "width": CARD_WIDTH,
+      "height": CARD_HEIGHT
+   }
+   ctx.rect(rectCoordinates.x, rectCoordinates.y, rectCoordinates.width, rectCoordinates.height);
+   ctx.stroke();
+
    $('#player-cards').append(`<h2>Player cards: ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank}</h2>`);
-   $('#player-actions').append(`<button value="Hit">HIT</button>`);
+   let canvasPlayerCards=document.getElementById("canvas-player-cards");
+   ctx=canvasPlayerCards.getContext("2d");
+   ctx.rect(0,0,50,75);
+   ctx.stroke();
+   ctx.rect(55,0,50,75);
+   ctx.stroke();
+   $('#player-actions').append(`<button type="button" class="btn btn-light" role="button" value="Hit">HIT</button>`);
    $('#player-actions').append(`<button value="Double">DOUBLE</button>`);
    $('#player-actions').append(`<button value="Split">SPLIT</button>`);
    $('#player-actions').append(`<button value="Stand">STAND</button>`);
-   $('#new-hand').append(`<button value="new-hand">New hand</button>`);
+   $('#new-hand').append(`<button type="button" class="btn btn-primary" value="new-hand">New hand</button>`);
 }
 
 const prepareBoard = () => {
