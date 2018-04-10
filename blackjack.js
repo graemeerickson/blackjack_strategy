@@ -41,10 +41,6 @@ const getLocalStorage = () => {
       $('tbody').append(`<tr><td>${index+1}</td><td>${item.handType}</td><td>${item.dealerCard}</td><td>${item.playerCard1}  ${item.playerCard2}</td><td>${item.userDecision}</td><td>${item.correctMove}</td></tr>`)
    });
 
-   console.log(`Wrong moves - standard: ${standardCount}`);
-   console.log(`Wrong moves - ace: ${aceCount}`);
-   console.log(`Wrong moves - pairs: ${pairCount}`);
-
    let scoreboardStr = localStorage.getItem('storedBlackjackScoreboard');
    scoreboardStr === null ? scoreboard = new Scorecard(0, 0, 0) : scoreboard = JSON.parse(scoreboardStr);
 
@@ -222,16 +218,17 @@ const determineCorrectMove = (userDecision) => {
 }
 
 const changeGameplayStyle = (e) => {
-   $(this).addClass('active-tick').siblings().removeClass('active-tick');
-   let gameplayStyleText = e.target.text;
+   // $(this).addClass('active-tick').siblings().removeClass('active-tick');
+   let gameplayStyleText = e.target.value;
+   console.log(e.target.value);
    switch (gameplayStyleText) {
-      case 'All cards':
+      case 'all-cards':
          gameplayStyle = 'all-cards';
          break;
-      case 'Aces only':
+      case 'aces-only':
          gameplayStyle = 'aces-only';
          break;
-      case 'Pairs only':
+      case 'pairs-only':
          gameplayStyle = 'pairs-only';
          break;
    }
@@ -253,11 +250,11 @@ const clearBoard = () => {
    $('#dealer-card1').empty();
    $('#dealer-card2').empty();
    $('#player-cards').empty();
-   $('#player-actions').empty();
    $('#notify-user').empty();
-   $('#new-hand').remove();
+   $('#new-deal').empty();
+   $('.game-mode-button').off('click');
    $('#player-actions').off('click');
-   $('#new-hand').off('click');
+   $('#new-hand-button').off('click');
 }
 
 const showBoard = () => {
@@ -269,11 +266,7 @@ const showBoard = () => {
    $('#dealer-card1').append(`<img class="card-image animated slideInDown" id="dealer-card1" src="images/cards/gray_back.png">`);
    $('#player-cards').append(`<img class="card-image animated slideInUp" id="player-card1" src="images/cards/${player1CardImageName}.png">`);
    $('#player-cards').append(`<img class="card-image animated slideInUp" id="player-card2" src="images/cards/${player2CardImageName}.png">`);
-   $('#player-actions').append(`<button type="button" class="btn btn-secondary btn-player-action" role="button" value="Hit">HIT</button>`);
-   $('#player-actions').append(`<button type="button" class="btn btn-secondary btn-player-action" role="button" value="Double">DOUBLE</button>`);
-   $('#player-actions').append(`<button type="button" class="btn btn-secondary btn-player-action" role="button" value="Split">SPLIT</button>`);
-   $('#player-actions').append(`<button type="button" class="btn btn-secondary btn-player-action" role="button" value="Stand">STAND</button>`);
-   $('#new-deal').append(`<button type="button" class="btn btn-primary float-left" id="new-hand" value="new-hand">Deal</button>`);
+   $('#new-deal').append(`<button type="button" class="btn btn-primary float-left" id="new-hand-button" value="new-hand">Deal</button>`);
 }
 
 const prepareBoard = () => {
@@ -286,13 +279,13 @@ const dealNewHand = () => {
    calcDealerHand(myDeck);
    calcPlayerHand(myDeck);
    prepareBoard();
-   $('#new-hand').click(dealNewHand);
+   $('.game-mode-button').click(changeGameplayStyle);
+   $('#new-hand-button').click(dealNewHand);
    $('.btn-player-action').click(getUserAction);
 }
 
 $(document).ready(function() {
    getLocalStorage();
    dealNewHand();
-   $('.dropdown-item').click(changeGameplayStyle);
    $('#scorecard-reset').click(resetScoreboardAndMoveHistory);
 });
