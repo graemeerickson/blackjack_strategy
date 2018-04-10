@@ -11,8 +11,13 @@ h4 {
 th {
    padding: 1px 7px;
 }
-.container {
-   /*height: auto;*/
+.blackjack-logo {
+   width: 35px;
+   height: 40px;
+}
+.info-icon {
+   width: 29px;
+   height: 29px;
 }
 .scoreboard {
    background-color: #F8F9FA;
@@ -22,6 +27,11 @@ th {
 }
 .dropdown-item {
    cursor: pointer;
+}
+.game-mode-button {
+   /*margin: 0;*/
+   /*padding: 0;*/
+   margin-top: 2px;
 }
 .active-tick a::after {
    content: '\f00c'; /* http://fontawesome.io/3.2.1/icon/ok/ */
@@ -34,21 +44,7 @@ th {
    -webkit-animation-duration: .3s;
    -moz-animation-duration: .3s;
 }
-#dealer-card1 {
-   /*-webkit-animation-delay: .1s;*/
-   transform: rotate(20deg);
-}
-#dealer-card2 {
-   /*-webkit-animation-delay: .3s;*/
-}
-#player-card1 {
-   /*-webkit-animation-delay: 0s;*/
-}
-#player-card2 {
-   /*-webkit-animation-delay: .2s;*/
-   transform: rotate(20deg);
-}
-.dealer {
+.dealer-area {
    padding: 35px 0px 30px 0px;
 }
 .user-notification {
@@ -58,13 +54,18 @@ th {
    -webkit-animation-duration: .8s;
    -moz-animation-duration: .8s;
 }
-#notify-user {
+.player-area {
+   padding: 30px 0px 40px 0px;
 }
-.player {
-   padding: 40px 0px 40px 0px;
+.action-panel {
+   cursor: default;
 }
 .btn-player-action {
-   margin: 0 3px;
+   /*margin: 0 3px;*/
+   width: 85px;
+}
+.left-hand-side {
+   /*text-align: right;*/
 }
 .chart-image {
    height: 24px;
@@ -73,10 +74,6 @@ th {
 .reference-card-image {
    height: 24px;
    width: 24px;
-}
-#strategy-reference-card {
-   height: 530px;
-   width: 396px;
 }
 .btn-modal-buttons {
    display: inline;
@@ -87,17 +84,28 @@ th {
 #dealer-card1 {
    display: inline;
    margin-right: -95px;
+   transform: rotate(20deg);
 }
 #dealer-card2 {
    display: inline;
 }
+#player-card1 {
+}
+#player-card2 {
+   transform: rotate(20deg);
+}
+#strategy-reference-card {
+   height: 530px;
+   width: 396px;
+}
 #player-actions {
    display: inline;
+   padding: 0;
 }
 #new-deal {
    display: inline;
 }
-#new-hand {
+#new-hand-button {
    display: inline;
 }
 #scorecard-wins {
@@ -111,11 +119,9 @@ th {
    margin: 0 3px;
 }
 #scorecard-percentage {
-   /*font-weight: bold;*/
    margin: 0 5px;
 }
 #scorecard-reset {
-   /*padding: 2px 6px;*/
    color: red;
    margin-left: 15px;
    cursor: pointer;
@@ -133,10 +139,6 @@ th {
       -webkit-animation-duration: .5s;
       -moz-animation-duration: .5s;
    }
-   .navbar-brand {
-      font-size: 14px;
-      font-weight: bold;
-   }
    .btn-player-action {
       padding: 4px 8px;
    }
@@ -153,7 +155,7 @@ th {
       height: 18px;
    }
    .dealer {
-      padding: 10px 0px 25px 0px;
+      padding: 15px 0px 25px 0px;
    }
    .player {
       padding: 25px 0px 25px 0px;
