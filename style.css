@@ -3,18 +3,24 @@ body {
 }
 p {
    cursor: default;
+   display: inline;
 }
-h2 {
+h4 {
    cursor: default;
 }
-canvas {
-   width: 100%;
-   height: auto;
+th {
+   padding: 1px 7px;
 }
 .container {
-   text-align: center;
+   /*height: auto;*/
 }
-.gameplay-style-dropdown {
+.scoreboard {
+   background-color: #F8F9FA;
+   margin: 0 auto;
+   padding-bottom: 5px;
+   cursor: default;
+}
+.dropdown-item {
    cursor: pointer;
 }
 .active-tick a::after {
@@ -22,29 +28,153 @@ canvas {
    font-family: 'FontAwesome';
    float: right;
 }
-#dealer {
-   height: 5%;
+.card-image {
+   width: 138px;
+   height: 211px;
+   -webkit-animation-duration: .3s;
+   -moz-animation-duration: .3s;
 }
-#scorecard-wins {
-   color: green;
-   font-weight: bold;
-   margin-left: 5px;
+#dealer-card1 {
+   /*-webkit-animation-delay: .1s;*/
+   transform: rotate(20deg);
 }
-#scorecard-losses {
-   color: red;
-   font-weight: bold;
-   margin-left: 5px;
+#dealer-card2 {
+   /*-webkit-animation-delay: .3s;*/
 }
-#scorecard-percentage {
-   font-weight: bold;
-   margin-left: 5px;
+#player-card1 {
+   /*-webkit-animation-delay: 0s;*/
+}
+#player-card2 {
+   /*-webkit-animation-delay: .2s;*/
+   transform: rotate(20deg);
+}
+.dealer {
+   padding: 35px 0px 30px 0px;
+}
+.user-notification {
+   height: 24px;
+}
+.result-message {
+   -webkit-animation-duration: .8s;
+   -moz-animation-duration: .8s;
+}
+#notify-user {
+}
+.player {
+   padding: 40px 0px 40px 0px;
+}
+.btn-player-action {
+   margin: 0 3px;
+}
+.chart-image {
+   height: 24px;
+   width: 24px;
+}
+.reference-card-image {
+   height: 24px;
+   width: 24px;
+}
+#strategy-reference-card {
+   height: 530px;
+   width: 396px;
+}
+.btn-modal-buttons {
+   display: inline;
+}
+.strategy-reference-card-body {
+   padding: 4px;
+}
+#dealer-card1 {
+   display: inline;
+   margin-right: -95px;
+}
+#dealer-card2 {
+   display: inline;
+}
+#player-actions {
+   display: inline;
+}
+#new-deal {
+   display: inline;
 }
 #new-hand {
    display: inline;
 }
+#scorecard-wins {
+   color: green;
+   font-weight: bold;
+   margin: 0 3px;
+}
+#scorecard-losses {
+   color: red;
+   font-weight: bold;
+   margin: 0 3px;
+}
+#scorecard-percentage {
+   /*font-weight: bold;*/
+   margin: 0 5px;
+}
+#scorecard-reset {
+   /*padding: 2px 6px;*/
+   color: red;
+   margin-left: 15px;
+   cursor: pointer;
+}
 
-@media (min-width: 768px) {
-   ul.nav li.dropdown:hover > ul.dropdown-menu {
+/*@media (min-width: 768px) {
+   ul.navbar-nav li.dropdown:hover > .dropdown-menu {
       display: block;
    }
+}*/
+@media (max-width: 600px) {
+   .card-image {
+      width: 99px;
+      height: 151px;
+      -webkit-animation-duration: .5s;
+      -moz-animation-duration: .5s;
+   }
+   .navbar-brand {
+      font-size: 14px;
+      font-weight: bold;
+   }
+   .btn-player-action {
+      padding: 4px 8px;
+   }
+   .result-message {
+      font-size: 18px;
+      -webkit-animation-duration: .5s;
+      -moz-animation-duration: .5s;
+   }
+   #dealer-card1 {
+      display: inline;
+      margin-right: -75px;
+   }
+   .user-notification {
+      height: 18px;
+   }
+   .dealer {
+      padding: 10px 0px 25px 0px;
+   }
+   .player {
+      padding: 25px 0px 25px 0px;
+   }
+   #strategy-reference-card {
+      height: 369px;
+      width: 297px;
+   }
 }
+
+/* Extra small devices (phones, 600px and down) */
+/*@media only screen and (max-width: 600px) {...} */
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/*@media only screen and (min-width: 600px) {...} */
+
+/* Medium devices (landscape tablets, 768px and up) */
+/*@media only screen and (min-width: 768px) {...} */
+
+/* Large devices (laptops/desktops, 992px and up) */
+/*@media only screen and (min-width: 992px) {...} */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/*@media only screen and (min-width: 1200px) {...}*/

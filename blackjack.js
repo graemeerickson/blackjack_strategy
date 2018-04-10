@@ -4,8 +4,6 @@ let moveHistory = [];
 let scoreboard;
 let gameplayStyle;
 const DEFAULT_GAMEPLAY_STYLE = 'all-cards';
-const CARD_WIDTH = 50;
-const CARD_HEIGHT = 75;
 
 const updateLocalStorageHistoryAndScorecard = () => {
    localStorage.setItem('storedBlackjackMoveHistory', JSON.stringify(moveHistory));
@@ -19,13 +17,40 @@ const updateLocalStorageGameplayStyle = () => {
 const getLocalStorage = () => {
    let moveHistoryStr = localStorage.getItem('storedBlackjackMoveHistory');
    moveHistoryStr === null ? moveHistory = [] : moveHistory = JSON.parse(moveHistoryStr);
+   let lossHistory = moveHistory.filter( (item) => {
+      return item.result === 'Loss'
+   })
+   let standardCount = 0;
+   let aceCount = 0;
+   let pairCount = 0;
+   lossHistory.forEach( (item) => {
+      switch (item.handType) {
+         case "Standard":
+            standardCount++;
+            break;
+         case "Ace":
+            aceCount++;
+            break;
+         case "Pair":
+            pairCount++;
+            break;
+      };
+   });
+
+   lossHistory.forEach( (item, index) => {
+      $('tbody').append(`<tr><td>${index+1}</td><td>${item.handType}</td><td>${item.dealerCard}</td><td>${item.playerCard1}  ${item.playerCard2}</td><td>${item.userDecision}</td><td>${item.correctMove}</td></tr>`)
+   });
+
+   console.log(`Wrong moves - standard: ${standardCount}`);
+   console.log(`Wrong moves - ace: ${aceCount}`);
+   console.log(`Wrong moves - pairs: ${pairCount}`);
 
    let scoreboardStr = localStorage.getItem('storedBlackjackScoreboard');
    scoreboardStr === null ? scoreboard = new Scorecard(0, 0, 0) : scoreboard = JSON.parse(scoreboardStr);
 
    $('#scorecard-wins').text(scoreboard.wins);
    $('#scorecard-losses').text(scoreboard.losses);
-   $('#scorecard-percentage').text(scoreboard.winPercentage);
+   $('#scorecard-percentage').text('(' + scoreboard.winPercentage + '%)');
 
    let gameplayStyleStr = localStorage.getItem('storedBlackjackGameplayStyle');
    gameplayStyleStr === null ? gameplayStyle = DEFAULT_GAMEPLAY_STYLE : gameplayStyle = JSON.parse(gameplayStyleStr);
@@ -43,6 +68,16 @@ const getLocalStorage = () => {
    };
 }
 
+const resetScoreboardAndMoveHistory = () => {
+   scoreboard = new Scorecard(0, 0, 0);
+   moveHistory = []
+   $('#scorecard-wins').text(scoreboard.wins);
+   $('#scorecard-losses').text(scoreboard.losses);
+   $('#scorecard-percentage').text('(' + scoreboard.winPercentage + '%)');
+   $('tbody').empty();
+   updateLocalStorageHistoryAndScorecard();
+}
+
 const updateMoveHistory = (dealerCard, playerHand, userDecision, correctMove, playerHandType, result) => {
    let playerMoveSummary = {
       dealerCard: dealerCard.rank,
@@ -54,6 +89,10 @@ const updateMoveHistory = (dealerCard, playerHand, userDecision, correctMove, pl
       result: result
    }
    moveHistory.push(playerMoveSummary);
+   if (result === 'Loss') {
+      let rowCount = $('tr').length;
+      $('tbody').append(`<tr><td>${rowCount}</td><td>${playerMoveSummary.handType}</td><td>${playerMoveSummary.dealerCard}</td><td>${playerMoveSummary.playerCard1}  ${playerMoveSummary.playerCard2}</td><td>${playerMoveSummary.userDecision}</td><td>${playerMoveSummary.correctMove}</td></tr>`)
+   };
 }
 
 const getRemainingCards = (myDeck) => {
@@ -132,10 +171,10 @@ const updateScoreboard = (result) => {
          scoreboard.losses += 1;
          break;
    }
-   scoreboard.winPercentage = Math.round((scoreboard.wins / (scoreboard.wins + scoreboard.losses)) * 100) * 100 / 100 + '%';
+   scoreboard.winPercentage = Math.round((scoreboard.wins / (scoreboard.wins + scoreboard.losses)) * 100) * 100 / 100;
    $('#scorecard-wins').text(scoreboard.wins);
    $('#scorecard-losses').text(scoreboard.losses);
-   $('#scorecard-percentage').text(scoreboard.winPercentage);
+   $('#scorecard-percentage').text('(' + scoreboard.winPercentage + '%)');
 }
 
 const getCorrectMove = (dealerPlayerHandKey) => {
@@ -170,10 +209,12 @@ const determineCorrectMove = (userDecision) => {
    let correctMove = getCorrectMove(dealerPlayerHandKey);
    if (userDecision === correctMove) {
       result = 'Win';
-      $('#notify-user').append(`<h2>Correct - ${correctMove} with ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank} and dealer ${dealerCard.rank}</h2>`);
+      $('#notify-user').append(`<h4 class="animated fadeInUp result-message">Correct - ${correctMove} with ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank} and dealer ${dealerCard.rank}</h4>`);
+      $('.user-notification').addClass('visible').removeClass('invisible');
    } else {
       result = 'Loss';
-      $('#notify-user').append(`<h2>Wrong - ${correctMove} with ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank} and dealer ${dealerCard.rank}.</h2>`);
+      $('#notify-user').append(`<h4 class="animated shake result-message">Wrong - ${correctMove} with ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank} and dealer ${dealerCard.rank}</h4>`);
+      $('.user-notification').addClass('visible').removeClass('invisible');
    }
    updateScoreboard(result);
    updateMoveHistory(dealerCard, playerHand, userDecision, correctMove, playerHand.playerHandType, result);
@@ -181,6 +222,7 @@ const determineCorrectMove = (userDecision) => {
 }
 
 const changeGameplayStyle = (e) => {
+   $(this).addClass('active-tick').siblings().removeClass('active-tick');
    let gameplayStyleText = e.target.text;
    switch (gameplayStyleText) {
       case 'All cards':
@@ -199,7 +241,7 @@ const changeGameplayStyle = (e) => {
 
 const getUserAction = (e) => {
    userDecision = e.target.value;
-   $('#player-actions').off('click');  
+   $('.btn-player-action').off('click');  
    determineCorrectMove(userDecision);
 }
 
@@ -208,41 +250,30 @@ const initializeDeck = () => {
 }
 
 const clearBoard = () => {
-   $('#dealer-card').empty();
+   $('#dealer-card1').empty();
+   $('#dealer-card2').empty();
    $('#player-cards').empty();
    $('#player-actions').empty();
    $('#notify-user').empty();
-   $('#new-hand').empty();
+   $('#new-hand').remove();
    $('#player-actions').off('click');
    $('#new-hand').off('click');
 }
 
 const showBoard = () => {
-   $('#dealer-card').append(`<h2>Dealer card: ${dealerCard.rank}</h2>`);
-   let canvasDealerCard=document.getElementById("canvas-dealer-card");
-   let ctx = canvasDealerCard.getContext("2d");
-   let screenMidpoint = $("#canvas-dealer-card").parent().width() / 2 - CARD_WIDTH;
-   let rectCoordinates = {
-      "x": screenMidpoint,
-      "y": 0,
-      "width": CARD_WIDTH,
-      "height": CARD_HEIGHT
-   }
-   ctx.rect(rectCoordinates.x, rectCoordinates.y, rectCoordinates.width, rectCoordinates.height);
-   ctx.stroke();
-
-   $('#player-cards').append(`<h2>Player cards: ${playerHand.playerCard1.rank}, ${playerHand.playerCard2.rank}</h2>`);
-   let canvasPlayerCards=document.getElementById("canvas-player-cards");
-   ctx=canvasPlayerCards.getContext("2d");
-   ctx.rect(0,0,50,75);
-   ctx.stroke();
-   ctx.rect(55,0,50,75);
-   ctx.stroke();
-   $('#player-actions').append(`<button type="button" class="btn btn-light" role="button" value="Hit">HIT</button>`);
-   $('#player-actions').append(`<button value="Double">DOUBLE</button>`);
-   $('#player-actions').append(`<button value="Split">SPLIT</button>`);
-   $('#player-actions').append(`<button value="Stand">STAND</button>`);
-   $('#new-hand').append(`<button type="button" class="btn btn-primary" value="new-hand">New hand</button>`);
+   let dealerCardImageName = dealerCard.rank + dealerCard.suit.slice(0,1).toUpperCase();
+   let player1CardImageName = playerHand.playerCard1.rank + playerHand.playerCard1.suit.slice(0,1).toUpperCase();
+   let player2CardImageName = playerHand.playerCard2.rank + playerHand.playerCard2.suit.slice(0,1).toUpperCase();
+   
+   $('#dealer-card2').append(`<img class="card-image animated slideInDown" id="dealer-card2" src="images/cards/${dealerCardImageName}.png">`);
+   $('#dealer-card1').append(`<img class="card-image animated slideInDown" id="dealer-card1" src="images/cards/gray_back.png">`);
+   $('#player-cards').append(`<img class="card-image animated slideInUp" id="player-card1" src="images/cards/${player1CardImageName}.png">`);
+   $('#player-cards').append(`<img class="card-image animated slideInUp" id="player-card2" src="images/cards/${player2CardImageName}.png">`);
+   $('#player-actions').append(`<button type="button" class="btn btn-secondary btn-player-action" role="button" value="Hit">HIT</button>`);
+   $('#player-actions').append(`<button type="button" class="btn btn-secondary btn-player-action" role="button" value="Double">DOUBLE</button>`);
+   $('#player-actions').append(`<button type="button" class="btn btn-secondary btn-player-action" role="button" value="Split">SPLIT</button>`);
+   $('#player-actions').append(`<button type="button" class="btn btn-secondary btn-player-action" role="button" value="Stand">STAND</button>`);
+   $('#new-deal').append(`<button type="button" class="btn btn-primary float-left" id="new-hand" value="new-hand">Deal</button>`);
 }
 
 const prepareBoard = () => {
@@ -256,15 +287,12 @@ const dealNewHand = () => {
    calcPlayerHand(myDeck);
    prepareBoard();
    $('#new-hand').click(dealNewHand);
-   $('#player-actions').click(getUserAction);
+   $('.btn-player-action').click(getUserAction);
 }
 
 $(document).ready(function() {
    getLocalStorage();
    dealNewHand();
-   // $('input').click(changeGameplayStyle);
-   $('.gameplay-style-dropdown').click(changeGameplayStyle);
-   $('.gameplay-style-dropdown').click(function(e) {
-      $(this).addClass('active-tick').siblings().removeClass('active-tick');
-   });
+   $('.dropdown-item').click(changeGameplayStyle);
+   $('#scorecard-reset').click(resetScoreboardAndMoveHistory);
 });

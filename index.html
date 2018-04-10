@@ -8,17 +8,38 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
    <meta name="viewport" content="width=device-width,initial-scale=1">
-   <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700" rel="stylesheet">
-   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="
+   sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
    <link rel="stylesheet" type="text/css" href="style.css">
    <title>Blackjack Strategy</title>
 </head>
 <body>
-   <nav class="navbar navbar-default bg-dark">
-      <div class="container-fluid">
-       <!-- Brand and toggle get grouped for better mobile display -->
-         <div class="navbar-header">
+   <nav class="navbar navbar-expand-sm navbar-light bg-light text-white">
+      <a class="navbar-brand" href="index.html">Blackjack Strategy</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Game Mode
+               </a>
+               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" id="all-cards">All cards</a>
+                  <a class="dropdown-item" id="aces-only">Aces only</a>
+                  <a class="dropdown-item" id="pairs-only">Pairs only</a>
+               </div>
+            </li>
+         </ul>
+      </div>
+   </nav>
+      <!-- <div class="container-fluid"> -->
+       <!-- Brand and toggle get grouped for better mobile display  -->
+     <!--     <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
@@ -26,10 +47,10 @@
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="index.html">Blackjack Strategy</a>
-         </div>
+         </div> -->
 
          <!-- Collect the nav links, forms, and other content for toggling -->
-         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+   <!--       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                <li class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Game Mode <span class="caret"></span></a>
@@ -48,36 +69,101 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                <li><a>Instructions</a></li>
-            </ul>
-         </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-   </nav>
-   <div class="container">
-      <div class="row" id="dealer">
-         <div class="col" id="dealer">
-            <div id="dealer-card"></div>
-            <canvas id="canvas-dealer-card">
-            </canvas>
-         </div>
-      </div>
-      <div class="row">
-         <div id="player-cards"></div>
-         <div class="col" id="player">
-            <div id="player-cards"></div>
-            <canvas id="canvas-player-cards">
-            </canvas>
-         </div>
-      </div>
-      <div class="row">
-         <div id="player-actions"></div>
-         <div id="new-hand"></div>
-      </div>
-      <div class="row">
-         <div id="notify-user"></div>
+            </ul> -->
+         <!-- </div>/.navbar-collapse -->
+      <!-- </div>/.container-fluid -->
+    <!-- </nav> -->
+
+   <div class="row scoreboard">
+      <div class="col-12 text-center">
+         <p id="scorecard-label">Score: </p>
+         <p id="scorecard-wins"></p>
+         <p>-</p>
+         <p id="scorecard-losses"></p>
+         <p id="scorecard-percentage"></p>
+         <p id="scorecard-reset">Reset</button>
       </div>
    </div>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+   <div class="container text-center">
+      <div class="row dealer">
+         <div class="col-12">
+            <div id="dealer-card1"></div>
+            <div id="dealer-card2"></div>
+         </div>
+      </div>
+      <div class="row user-notification invisible">
+         <div class="col-12">
+            <div id="notify-user"></div>
+         </div>
+      </div>
+      <div class="row player">
+         <div class="col-12">
+            <div id="player-cards"></div>
+         </div>
+      </div>
+      <div class="row action-panel">
+         <div class="col-lg-3 col-md-3 col-sm-3 text-right" id="more-info-buttons">
+            <button type="button" class="btn btn-light btn-modal-buttons" data-toggle="modal" data-target="#lossHistoryModal" role="button"><img class="chart-image" src="images/chart-line.svg"></button>
+            <!-- Modal -->
+               <div class="modal fade" id="lossHistoryModal" tabindex="-1" role="dialog" aria-labelledby="lossHistoryModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                     <div class="modal-content text-center">
+                        <div class="modal-header">
+                           <h5 class="modal-title" id="lossHistoryModalLabel">Loss History</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                           </button>
+                        </div>
+                        <div class="modal-body">
+                           <table class="table-light table-bordered table-responsive move-history-modal">
+                              <thead>
+                                 <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Hand Type</th>
+                                    <th scope="col">Dealer</th>
+                                    <th scope="col">Your Hand</th>
+                                    <th scope="col">Your Move</th>
+                                    <th scope="col">Correct Move</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                           </table>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            <button type="button" class="btn btn-light btn-modal-buttons" data-toggle="modal" data-target="#referenceCardModal" role="button"><img class="reference-card-image" src="images/reference-card.svg"></button>
+            <!-- Modal -->
+               <div class="modal fade" id="referenceCardModal" tabindex="-1" role="dialog" aria-labelledby="referenceCardModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                     <div class="modal-content text-center">
+                        <div class="modal-header">
+                           <h5 class="modal-title" id="referenceCardModalLabel">Blackjack Basic Strategy</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                           </button>
+                        </div>
+                        <div class="modal-body strategy-reference-card-body text-center">
+                           <img id="strategy-reference-card" src="images/reference-card.png">
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+         </div>
+         <div class="col-lg-6 col-md-6 col-sm-6 justify-content-center" id="player-actions"></div>
+         <div class="col-lg-2 col-md-2 col-sm-2" id="new-deal"></div>
+      </div>
+   </div>
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
    <script src="data.js"></script>
    <script src="blackjack.js"></script>
 </body>
