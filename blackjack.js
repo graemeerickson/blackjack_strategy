@@ -252,7 +252,10 @@ const clearBoard = () => {
    $('#player-cards').empty();
    $('#notify-user').empty();
    $('#new-deal').empty();
-   $('.game-mode-button').off('click');
+   // $('.game-mode-button').off('click');
+   // $('#all-cards').off('click');
+   // $('#aces-only').off('click');
+   // $('#pairs-only').off('click');
    $('#player-actions').off('click');
    $('#new-hand-button').off('click');
 }
@@ -279,7 +282,7 @@ const dealNewHand = () => {
    calcDealerHand(myDeck);
    calcPlayerHand(myDeck);
    prepareBoard();
-   $('.game-mode-button').click(changeGameplayStyle);
+   // $('.game-mode-button').click(changeGameplayStyle);
    $('#new-hand-button').click(dealNewHand);
    $('.btn-player-action').click(getUserAction);
 }
@@ -287,5 +290,8 @@ const dealNewHand = () => {
 $(document).ready(function() {
    getLocalStorage();
    dealNewHand();
+   $('#all-cards').click(changeGameplayStyle);
+   $('#aces-only').click(changeGameplayStyle);
+   $('#pairs-only').click(changeGameplayStyle);
    $('#scorecard-reset').click(resetScoreboardAndMoveHistory);
 });
