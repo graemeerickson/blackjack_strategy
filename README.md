@@ -15,11 +15,11 @@ There isn't a way to win or lose at Blackjack Strategy, though there is a scoreb
 Blackjack Strategy was designed with mobile in mind. It uses Bootstrap's grid functionality and looks good on modern smartphones.
 
 #### Screenshots
-![Blackjack Strategy Screenshot #1](https://i.imgur.com/p10WNUS.png "Blackjack Strategy Screenshot #1)
-![Blackjack Strategy Screenshot #2](https://i.imgur.com/Oi2vClO.png "Blackjack Strategy Screenshot #2)
-![Blackjack Strategy Screenshot #3](https://i.imgur.com/xtrbIiM.png "Blackjack Strategy Screenshot #3)
-![Blackjack Strategy Screenshot #4](https://i.imgur.com/0xpkaZZ.png "Blackjack Strategy Screenshot #4)
-![Blackjack Strategy Screenshot #5](https://i.imgur.com/DvnWXDZ.jpg "Blackjack Strategy Screenshot #5)
+<img width="1440" alt="blackjack strategy screenshots - 1" src="https://user-images.githubusercontent.com/5596001/38625245-debe8480-3d5e-11e8-804f-0ccec65a4e60.png">
+<img width="1440" alt="blackjack strategy screenshots - 2" src="https://user-images.githubusercontent.com/5596001/38625246-df340124-3d5e-11e8-896a-0d3196864b4a.png">
+<img width="1440" alt="blackjack strategy screenshots - 3" src="https://user-images.githubusercontent.com/5596001/38625247-dfa65094-3d5e-11e8-8b13-c3af8494e60f.png">
+<img width="1423" alt="blackjack strategy screenshots - 4" src="https://user-images.githubusercontent.com/5596001/38625249-e031e3c0-3d5e-11e8-89df-a84523f9b5f8.png">
+![blackjack strategy screenshots - 5](https://user-images.githubusercontent.com/5596001/38625286-f5aac62c-3d5e-11e8-8dd4-4bbf522f7049.jpg)
 
 #### Data Structures
 Primary data objects include:
