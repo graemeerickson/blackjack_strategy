@@ -282,6 +282,10 @@ const dealNewHand = () => {
 $(document).ready(function() {
    getLocalStorage();
    dealNewHand();
+   $('[data-toggle="popover"]').popover();
+   $('.popover-dismiss').popover({
+      trigger: 'focus'
+   });
    $('.game-mode-button').click(changeGameplayStyle);
    $('#scorecard-reset').click(resetScoreboardAndMoveHistory);
 });
