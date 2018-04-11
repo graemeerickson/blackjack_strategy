@@ -5,7 +5,7 @@
 A single-player game intended to train a user on Blackjack basic strategy.
 
 ## Objective & Game Details
-__Objective__
+#### Objective
 Blackjack Strategy helps teach the user to play Blackjack according to basic strategy in order to reduce the House edge by as much as possible.
 
 Presented with a pair of cards and a dealer's up card, the user can select from four options: (1) Hit, (2) Stand, (3) Split, or (4) Double. The user can alternatively choose to be dealt a new hand.
@@ -14,14 +14,14 @@ There isn't a way to win or lose at Blackjack Strategy, though there is a scoreb
 
 Blackjack Strategy was designed with mobile in mind. It uses Bootstrap's grid functionality and looks good on modern smartphones.
 
-__Screenshots__
+#### Screenshots
 ![Blackjack Strategy Screenshot #1](https://i.imgur.com/p10WNUS.png "Blackjack Strategy Screenshot #1)
 ![Blackjack Strategy Screenshot #2](https://i.imgur.com/Oi2vClO.png "Blackjack Strategy Screenshot #2)
 ![Blackjack Strategy Screenshot #3](https://i.imgur.com/xtrbIiM.png "Blackjack Strategy Screenshot #3)
 ![Blackjack Strategy Screenshot #4](https://i.imgur.com/0xpkaZZ.png "Blackjack Strategy Screenshot #4)
 ![Blackjack Strategy Screenshot #5](https://i.imgur.com/DvnWXDZ.jpg "Blackjack Strategy Screenshot #5)
 
-__Data Structures__
+#### Data Structures
 Primary data objects include:
 * Card: object
 	* rank: String (e.g., 'Jack')
