@@ -63,3 +63,4 @@ I would implement the following additional features:
 * Set cards to rotate slightly using CSS transform in order to give appearance of having been physically dealt by a dealer.
 * Show the user's odds of winning given chosen action vs correct action.
 * Make win/loss messages more meaningful (e.g., "Always double on 11").
+* Optimize card image loading performance.
