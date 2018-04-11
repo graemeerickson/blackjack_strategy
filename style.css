@@ -7,20 +7,16 @@ body {
 .blackjack-logo {
    width: 35px;
    height: 40px;
+   margin-left: 10px;
 }
 .game-mode-button {
    margin-top: 2px;
    width: 80px;
 }
-.game-mode-button:focus {
-   outline: none !important;
-}
-.btn-group:focus {
-   outline: none !important;
-}
 .info-icon {
    width: 29px;
    height: 29px;
+   margin-right: 10px;
 }
 
 /* BODY ELEMENTS */
@@ -68,9 +64,10 @@ p {
    display: inline;
 }
 #player-card1 {
-   /*transform: rotate(20deg);*/
+   margin: 0 2px;
 }
 #player-card2 {
+   margin: 0 2px;
 }
 .user-notification {
    height: 24px;
@@ -109,9 +106,6 @@ th {
 .btn-player-action {
    width: 85px;
 }
-.left-hand-side {
-   /*text-align: right;*/
-}
 #strategy-reference-card {
    height: 530px;
    width: 396px;
@@ -134,13 +128,30 @@ th {
    }
 }*/
 @media only screen and (max-width: 600px) {
+   nav {
+      padding: 0 auto;
+   }
+   .blackjack-logo {
+      margin-left: 1px;
+   }
+   .game-mode-button {
+      margin-top: 0px;
+   }
+   .info-icon {
+      /*margin-left: 5px;*/
+      margin-right: -4px;
+   }
+   .scoreboard {
+      margin-top: 2px;
+      margin-bottom: 4px;
+   }
    .card-image {
       width: 99px;
       height: 151px;
       -webkit-animation-duration: .5s;
       -moz-animation-duration: .5s;
    }
-   .dealer {
+   .dealer.area {
       padding: 15px 0px 10px 0px;
    }
    #dealer-card1 {
@@ -155,11 +166,12 @@ th {
       -webkit-animation-duration: .5s;
       -moz-animation-duration: .5s;
    }
-   .player {
-      padding: 10px 0px 5px 0px;
+   .player.area {
+      padding-top: 8px;
    }
    .btn-modal-buttons {
       margin: 2px 0 2px 2px;
+      width: 50px;
    }
    #strategy-reference-card {
       height: 369px;
@@ -171,6 +183,7 @@ th {
    #new-hand-button {
       margin: 2px 5px 0 -11px;
       height: 80px;
+      width: 95px;
    }
 }
 
