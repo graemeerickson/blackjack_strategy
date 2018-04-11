@@ -53,13 +53,13 @@ const getLocalStorage = () => {
 
    switch(gameplayStyle) {
       case 'all-cards':
-         $('#all-cards').addClass('active-tick').siblings().removeClass('active-tick');
+         $('#all-cards').addClass('active');
          break;
       case 'aces-only':
-         $('#aces-only').addClass('active-tick').siblings().removeClass('active-tick');
+         $('#aces-only').addClass('active');
          break;
       case 'pairs-only':
-         $('#pairs-only').addClass('active-tick').siblings().removeClass('active-tick');
+         $('#pairs-only').addClass('active');
          break;
    };
 }
@@ -94,7 +94,7 @@ const updateMoveHistory = (dealerCard, playerHand, userDecision, correctMove, pl
 const getRemainingCards = (myDeck) => {
    let remainingDeck = myDeck.filter( (card) => {
       if (playerHand.playerCard1 == null) {
-         return !card.played
+         return !card.played;
       } else {
          return !card.played && (card.value + playerHand.playerCard1.value !== 21);
       }
@@ -218,9 +218,8 @@ const determineCorrectMove = (userDecision) => {
 }
 
 const changeGameplayStyle = (e) => {
-   // $(this).addClass('active-tick').siblings().removeClass('active-tick');
+   $(e.target).addClass('active').siblings().removeClass('active');
    let gameplayStyleText = e.target.value;
-   console.log(e.target.value);
    switch (gameplayStyleText) {
       case 'all-cards':
          gameplayStyle = 'all-cards';
@@ -251,12 +250,7 @@ const clearBoard = () => {
    $('#dealer-card2').empty();
    $('#player-cards').empty();
    $('#notify-user').empty();
-   $('#new-deal').empty();
-   // $('.game-mode-button').off('click');
-   // $('#all-cards').off('click');
-   // $('#aces-only').off('click');
-   // $('#pairs-only').off('click');
-   $('#player-actions').off('click');
+   $('.btn-player-action').off('click');
    $('#new-hand-button').off('click');
 }
 
@@ -269,7 +263,6 @@ const showBoard = () => {
    $('#dealer-card1').append(`<img class="card-image animated slideInDown" id="dealer-card1" src="images/cards/gray_back.png">`);
    $('#player-cards').append(`<img class="card-image animated slideInUp" id="player-card1" src="images/cards/${player1CardImageName}.png">`);
    $('#player-cards').append(`<img class="card-image animated slideInUp" id="player-card2" src="images/cards/${player2CardImageName}.png">`);
-   $('#new-deal').append(`<button type="button" class="btn btn-primary float-left" id="new-hand-button" value="new-hand">Deal</button>`);
 }
 
 const prepareBoard = () => {
@@ -282,7 +275,6 @@ const dealNewHand = () => {
    calcDealerHand(myDeck);
    calcPlayerHand(myDeck);
    prepareBoard();
-   // $('.game-mode-button').click(changeGameplayStyle);
    $('#new-hand-button').click(dealNewHand);
    $('.btn-player-action').click(getUserAction);
 }
@@ -290,8 +282,6 @@ const dealNewHand = () => {
 $(document).ready(function() {
    getLocalStorage();
    dealNewHand();
-   $('#all-cards').click(changeGameplayStyle);
-   $('#aces-only').click(changeGameplayStyle);
-   $('#pairs-only').click(changeGameplayStyle);
+   $('.game-mode-button').click(changeGameplayStyle);
    $('#scorecard-reset').click(resetScoreboardAndMoveHistory);
 });
