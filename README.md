@@ -19,7 +19,7 @@ Blackjack Strategy was designed with mobile in mind. It uses Bootstrap's grid fu
 <img width="1440" alt="blackjack strategy screenshots - 2" src="https://user-images.githubusercontent.com/5596001/38625246-df340124-3d5e-11e8-896a-0d3196864b4a.png">
 <img width="1440" alt="blackjack strategy screenshots - 3" src="https://user-images.githubusercontent.com/5596001/38625247-dfa65094-3d5e-11e8-8b13-c3af8494e60f.png">
 <img width="1423" alt="blackjack strategy screenshots - 4" src="https://user-images.githubusercontent.com/5596001/38625249-e031e3c0-3d5e-11e8-89df-a84523f9b5f8.png">
-![blackjack strategy screenshots - 5](https://user-images.githubusercontent.com/5596001/38625286-f5aac62c-3d5e-11e8-8dd4-4bbf522f7049.jpg)
+<img width="1423" alt="blackjack strategy screenshots - 5" src="https://user-images.githubusercontent.com/5596001/38625528-89b67a32-3d5f-11e8-8d6d-461be3e01b7d.png">
 
 #### Data Structures
 Primary data objects include:
