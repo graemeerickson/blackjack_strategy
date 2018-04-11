@@ -15,11 +15,11 @@ There isn't a way to win or lose at Blackjack Strategy, though there is a scoreb
 Blackjack Strategy was designed with mobile in mind. It uses Bootstrap's grid functionality and looks good on modern smartphones.
 
 __Screenshots__
-[Blackjack Strategy Screenshot #1](https://i.imgur.com/p10WNUS.png "Blackjack Strategy Screenshot #1)
-[Blackjack Strategy Screenshot #2](https://i.imgur.com/Oi2vClO.png "Blackjack Strategy Screenshot #2)
-[Blackjack Strategy Screenshot #3](https://i.imgur.com/xtrbIiM.png "Blackjack Strategy Screenshot #3)
-[Blackjack Strategy Screenshot #4](https://i.imgur.com/0xpkaZZ.png "Blackjack Strategy Screenshot #4)
-[Blackjack Strategy Screenshot #5](https://i.imgur.com/DvnWXDZ.jpg "Blackjack Strategy Screenshot #5)
+![Blackjack Strategy Screenshot #1](https://i.imgur.com/p10WNUS.png "Blackjack Strategy Screenshot #1)
+![Blackjack Strategy Screenshot #2](https://i.imgur.com/Oi2vClO.png "Blackjack Strategy Screenshot #2)
+![Blackjack Strategy Screenshot #3](https://i.imgur.com/xtrbIiM.png "Blackjack Strategy Screenshot #3)
+![Blackjack Strategy Screenshot #4](https://i.imgur.com/0xpkaZZ.png "Blackjack Strategy Screenshot #4)
+![Blackjack Strategy Screenshot #5](https://i.imgur.com/DvnWXDZ.jpg "Blackjack Strategy Screenshot #5)
 
 __Data Structures__
 Primary data objects include:
@@ -36,7 +36,7 @@ Primary data objects include:
 * oddsTable: object containing every possible dealer/player hands card combination
 * Images of cards
 	* Initially attempted to draw via Canvas, but chose instead to use 52 (+1 back) card PNGs.
-
+	
 A new deck of cards is initialized for every deal. Dealer and player cards are chosen at random from the deck, and no card is played twice in the same hand.
 
 Once the user selects an action, the dealer and players card ranks are used to create a key, which is used to search the oddsTable object to retrieve the correct choice. The user is then notified whether or not he/she was correct, and the scoreboard is updated appropriately.
