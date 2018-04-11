@@ -51,7 +51,6 @@ p {
    height: 211px;
    -webkit-animation-duration: .3s;
    -moz-animation-duration: .3s;
-   /*transform: rotate(-5deg);*/
 }
 .dealer-area {
    padding: 0px 0px 15px 0px;
@@ -186,6 +185,8 @@ th {
       width: 95px;
    }
 }
+
+/*Responsiveness breakpoints for future development*/
 
 /* Extra small devices (phones, 600px and down) */
 /*@media only screen and (max-width: 600px) {...} */
