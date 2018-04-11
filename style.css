@@ -1,111 +1,35 @@
 body {
    font-family: 'Roboto', sans-serif;
+   overflow: hidden;
 }
-p {
-   cursor: default;
-   display: inline;
-}
-h4 {
-   cursor: default;
-}
-th {
-   padding: 1px 7px;
-}
+
+/* NAV ELEMENTS */
 .blackjack-logo {
    width: 35px;
    height: 40px;
+}
+.game-mode-button {
+   margin-top: 2px;
+   width: 80px;
+}
+.game-mode-button:focus {
+   outline: none !important;
+}
+.btn-group:focus {
+   outline: none !important;
 }
 .info-icon {
    width: 29px;
    height: 29px;
 }
+
+/* BODY ELEMENTS */
 .scoreboard {
-   background-color: #F8F9FA;
-   margin: 0 auto;
-   padding-bottom: 5px;
+   margin: 15px auto;
    cursor: default;
 }
-.dropdown-item {
-   cursor: pointer;
-}
-.game-mode-button {
-   /*margin: 0;*/
-   /*padding: 0;*/
-   margin-top: 2px;
-}
-.active-tick a::after {
-   content: '\f00c'; /* http://fontawesome.io/3.2.1/icon/ok/ */
-   font-family: 'FontAwesome';
-   float: right;
-}
-.card-image {
-   width: 138px;
-   height: 211px;
-   -webkit-animation-duration: .3s;
-   -moz-animation-duration: .3s;
-}
-.dealer-area {
-   padding: 35px 0px 30px 0px;
-}
-.user-notification {
-   height: 24px;
-}
-.result-message {
-   -webkit-animation-duration: .8s;
-   -moz-animation-duration: .8s;
-}
-.player-area {
-   padding: 30px 0px 40px 0px;
-}
-.action-panel {
+p {
    cursor: default;
-}
-.btn-player-action {
-   /*margin: 0 3px;*/
-   width: 85px;
-}
-.left-hand-side {
-   /*text-align: right;*/
-}
-.chart-image {
-   height: 24px;
-   width: 24px;
-}
-.reference-card-image {
-   height: 24px;
-   width: 24px;
-}
-.btn-modal-buttons {
-   display: inline;
-}
-.strategy-reference-card-body {
-   padding: 4px;
-}
-#dealer-card1 {
-   display: inline;
-   margin-right: -95px;
-   transform: rotate(20deg);
-}
-#dealer-card2 {
-   display: inline;
-}
-#player-card1 {
-}
-#player-card2 {
-   transform: rotate(20deg);
-}
-#strategy-reference-card {
-   height: 530px;
-   width: 396px;
-}
-#player-actions {
-   display: inline;
-   padding: 0;
-}
-#new-deal {
-   display: inline;
-}
-#new-hand-button {
    display: inline;
 }
 #scorecard-wins {
@@ -126,26 +50,98 @@ th {
    margin-left: 15px;
    cursor: pointer;
 }
+.card-image {
+   width: 138px;
+   height: 211px;
+   -webkit-animation-duration: .3s;
+   -moz-animation-duration: .3s;
+   /*transform: rotate(-5deg);*/
+}
+.dealer-area {
+   padding: 0px 0px 15px 0px;
+}
+#dealer-card1 {
+   display: inline;
+   margin-right: -95px;
+}
+#dealer-card2 {
+   display: inline;
+}
+#player-card1 {
+   /*transform: rotate(20deg);*/
+}
+#player-card2 {
+}
+.user-notification {
+   height: 24px;
+}
+h4 {
+   cursor: default;
+}
+.result-message {
+   -webkit-animation-duration: .8s;
+   -moz-animation-duration: .8s;
+}
+.player-area {
+   padding: 15px 0px 30px 0px;
+}
+/* ACTION PANEL ELEMENTS */
+.action-panel {
+   cursor: default;
+}
+.chart-image {
+   height: 24px;
+   width: 24px;
+}
+.reference-card-image {
+   height: 24px;
+   width: 24px;
+}
+.btn-modal-buttons {
+   display: inline;
+}
+th {
+   padding: 1px 7px;
+}
+.strategy-reference-card-body {
+   padding: 4px;
+}
+.btn-player-action {
+   width: 85px;
+}
+.left-hand-side {
+   /*text-align: right;*/
+}
+#strategy-reference-card {
+   height: 530px;
+   width: 396px;
+}
+#player-actions {
+   display: inline;
+   padding: 0;
+}
+#new-deal {
+   display: inline;
+}
+#new-hand-button {
+   display: inline;
+   width: 85px;
+}
 
 /*@media (min-width: 768px) {
    ul.navbar-nav li.dropdown:hover > .dropdown-menu {
       display: block;
    }
 }*/
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
    .card-image {
       width: 99px;
       height: 151px;
       -webkit-animation-duration: .5s;
       -moz-animation-duration: .5s;
    }
-   .btn-player-action {
-      padding: 4px 8px;
-   }
-   .result-message {
-      font-size: 18px;
-      -webkit-animation-duration: .5s;
-      -moz-animation-duration: .5s;
+   .dealer {
+      padding: 15px 0px 10px 0px;
    }
    #dealer-card1 {
       display: inline;
@@ -154,15 +150,27 @@ th {
    .user-notification {
       height: 18px;
    }
-   .dealer {
-      padding: 15px 0px 25px 0px;
+   .result-message {
+      font-size: 18px;
+      -webkit-animation-duration: .5s;
+      -moz-animation-duration: .5s;
    }
    .player {
-      padding: 25px 0px 25px 0px;
+      padding: 10px 0px 5px 0px;
+   }
+   .btn-modal-buttons {
+      margin: 2px 0 2px 2px;
    }
    #strategy-reference-card {
       height: 369px;
       width: 297px;
+   }
+   .btn-player-action {
+      margin: 2px auto;
+   }
+   #new-hand-button {
+      margin: 2px 5px 0 -11px;
+      height: 80px;
    }
 }
 
