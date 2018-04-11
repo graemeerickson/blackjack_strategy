@@ -16,130 +16,138 @@
    <title>Blackjack Strategy</title>
 </head>
 <body>
-   <nav class="navbar navbar-light bg-light">
-      <!-- Icon made from "http://www.onlinewebfonts.com/icon" and is licensed by CC BY 3.0 -->
-      <div class="justify-content-left">
-         <a class="navbar-brand" href="index.html"><img class="blackjack-logo" src="images/blackjack-logo.png"></a>
-      </div>
-      <div class="btn-group btn-group-sm justify-content-center" role="group" aria-label="game-modes">
-         <button type="button" class="btn btn-outline-secondary game-mode-button" id="all-cards" value="all-cards">All cards</button>
-         <button type="button" class="btn btn-outline-secondary game-mode-button" id="aces-only" value="aces-only">Aces only</button>
-         <button type="button" class="btn btn-outline-secondary game-mode-button" id="pairs-only" value="pairs-only">Pairs only</button>
-      </div>
-      <div class="justify-content-end">
-         <a tabindex="0" class="btn btn-light" role="button" data-toggle="popover" data-trigger="focus" data-html="true" data-content="Improve your odds of winning by reducing the House edge to ~0.05% using Blackjack basic strategy.<br><br>Based on your cards and the dealer's up-card, learn when it's best to Hit, Split, Double, or Stand.<br><br>Don't forget to check your loss history, then focus your training on the type of hands needing the most improvement.<br><br>This app's recommendations are based on a 4-8 card deck where the dealer stands on Soft 17." title="Blackjack Strategy"><img class="info-icon" src="images/info-button.png"></a>
-      </div>
-   </nav>
-   <div class="container text-center">
-      <div class="row scoreboard">
-         <div class="col-12 text-center">
-            <p id="scorecard-label">Score: </p>
-            <p id="scorecard-wins"></p>
-            <p>-</p>
-            <p id="scorecard-losses"></p>
-            <p id="scorecard-percentage"></p>
-            <p id="scorecard-reset">Reset</button>
+   <header>
+      <nav class="navbar navbar-light bg-light">
+         <!-- Icon made from "http://www.onlinewebfonts.com/icon" and is licensed by CC BY 3.0 -->
+         <div class="justify-content-left">
+            <a class="navbar-brand" href="index.html"><img class="blackjack-logo" src="images/blackjack-logo.png"></a>
          </div>
-      </div>
-      <div class="row dealer-area">
-         <div class="col-12">
-            <div id="dealer-card1"></div>
-            <div id="dealer-card2"></div>
+         <div class="btn-group btn-group-sm justify-content-center" role="group" aria-label="game-modes">
+            <button type="button" class="btn btn-outline-secondary game-mode-button" id="all-cards" value="all-cards">All cards</button>
+            <button type="button" class="btn btn-outline-secondary game-mode-button" id="aces-only" value="aces-only">Aces only</button>
+            <button type="button" class="btn btn-outline-secondary game-mode-button" id="pairs-only" value="pairs-only">Pairs only</button>
          </div>
-      </div>
-      <div class="row user-notification invisible">
-         <div class="col-12">
-            <div id="notify-user">
-               <h4 id="result-text"></h4>
+         <div class="justify-content-end">
+            <a tabindex="0" class="btn btn-light" role="button" data-toggle="popover" data-trigger="focus" data-html="true" data-content="Improve your odds of winning by reducing the House edge to ~0.05% using Blackjack basic strategy.<br><br>Based on your cards and the dealer's up-card, learn when it's best to Hit, Split, Double, or Stand.<br><br>Don't forget to check your loss history, then focus your training on the type of hands needing the most improvement.<br><br>This app's recommendations are based on a 4-8 card deck where the dealer stands on Soft 17." title="Blackjack Strategy"><img class="info-icon" src="images/info-button.png"></a>
+         </div>
+      </nav>
+   </header>
+   <main>
+      <div class="container text-center">
+         <article>
+            <div class="row scoreboard">
+               <div class="col-12 text-center">
+                  <p id="scorecard-label">Score: </p>
+                  <p id="scorecard-wins"></p>
+                  <p>-</p>
+                  <p id="scorecard-losses"></p>
+                  <p id="scorecard-percentage"></p>
+                  <p id="scorecard-reset">Reset</button>
+               </div>
             </div>
-         </div>
-      </div>
-      <div class="row player-area">
-         <div class="col-12">
-            <div id="player-cards"></div>
-         </div>
-      </div>
-      <div class="row action-panel no-gutters">
-         <div class="col-sm-4 col-2 text-right" id="more-info-buttons">
-            <div class="row no-gutters">
-               <div class="col-sm-2 offset-sm-8 col-12">
-                  <button type="button" class="btn btn-light btn-modal-buttons" data-toggle="modal" data-target="#lossHistoryModal" role="button"><img class="chart-image" src="images/chart-line.svg"></button>
-                  <!-- Modal -->
-                     <div class="modal fade" id="lossHistoryModal" tabindex="-1" role="dialog" aria-labelledby="lossHistoryModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                           <div class="modal-content text-center">
-                              <div class="modal-header">
-                                 <h5 class="modal-title" id="lossHistoryModalLabel">Loss History</h5>
-                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                 </button>
-                              </div>
-                              <div class="modal-body">
-                                 <table class="table-light table-bordered table-responsive move-history-modal">
-                                    <thead>
-                                       <tr>
-                                          <th scope="col">#</th>
-                                          <th scope="col">Hand Type</th>
-                                          <th scope="col">Dealer</th>
-                                          <th scope="col">Your Hand</th>
-                                          <th scope="col">Your Move</th>
-                                          <th scope="col">Correct Move</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                 </table>
-                              </div>
-                              <div class="modal-footer">
-                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="row dealer-area">
+               <div class="col-12">
+                  <div id="dealer-card1"></div>
+                  <div id="dealer-card2"></div>
+               </div>
+            </div>
+            <div class="row user-notification invisible">
+               <div class="col-12">
+                  <div id="notify-user">
+                     <h4 id="result-text"></h4>
+                  </div>
+               </div>
+            </div>
+            <div class="row player-area">
+               <div class="col-12">
+                  <div id="player-cards"></div>
+               </div>
+            </div>
+         </article>
+         <article>
+            <div class="row action-panel no-gutters">
+               <div class="col-sm-4 col-2 text-right" id="more-info-buttons">
+                  <div class="row no-gutters">
+                     <div class="col-sm-2 offset-sm-8 col-12">
+                        <button type="button" class="btn btn-light btn-modal-buttons" data-toggle="modal" data-target="#lossHistoryModal" role="button"><img class="chart-image" src="images/chart-line.svg"></button>
+                        <!-- Modal -->
+                           <div class="modal fade" id="lossHistoryModal" tabindex="-1" role="dialog" aria-labelledby="lossHistoryModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                 <div class="modal-content text-center">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title" id="lossHistoryModalLabel">Loss History</h5>
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                       </button>
+                                    </div>
+                                    <div class="modal-body">
+                                       <table class="table-light table-bordered table-responsive move-history-modal">
+                                          <thead>
+                                             <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Hand Type</th>
+                                                <th scope="col">Dealer</th>
+                                                <th scope="col">Your Hand</th>
+                                                <th scope="col">Your Move</th>
+                                                <th scope="col">Correct Move</th>
+                                             </tr>
+                                          </thead>
+                                          <tbody>
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                 </div>
                               </div>
                            </div>
-                        </div>
                      </div>
-               </div>
-               <div class="col-sm-2 col-12">
-                  <button type="button" class="btn btn-light btn-modal-buttons" data-toggle="modal" data-target="#referenceCardModal" role="button"><img class="reference-card-image" src="images/reference-card.svg"></button>
-                  <!-- Modal -->
-                     <div class="modal fade" id="referenceCardModal" tabindex="-1" role="dialog" aria-labelledby="referenceCardModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                           <div class="modal-content text-center">
-                              <div class="modal-header">
-                                 <h5 class="modal-title" id="referenceCardModalLabel">Blackjack Basic Strategy</h5>
-                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                 </button>
-                              </div>
-                              <div class="modal-body strategy-reference-card-body text-center">
-                                 <img id="strategy-reference-card" src="images/reference-card.png">
-                              </div>
-                              <div class="modal-footer">
-                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                     <div class="col-sm-2 col-12">
+                        <button type="button" class="btn btn-light btn-modal-buttons" data-toggle="modal" data-target="#referenceCardModal" role="button"><img class="reference-card-image" src="images/reference-card.svg"></button>
+                        <!-- Modal -->
+                           <div class="modal fade" id="referenceCardModal" tabindex="-1" role="dialog" aria-labelledby="referenceCardModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                 <div class="modal-content text-center">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title" id="referenceCardModalLabel">Blackjack Basic Strategy</h5>
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                       </button>
+                                    </div>
+                                    <div class="modal-body strategy-reference-card-body text-center">
+                                       <img id="strategy-reference-card" src="images/reference-card.png">
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                 </div>
                               </div>
                            </div>
-                        </div>
                      </div>
+                  </div>
                </div>
-            </div>
-         </div>
-         <div class="col-sm-4 col-8 justify-content-center" id="player-actions">
-            <div class="row no-gutters">
-               <div class="col-sm-6 col-12 left-hand-side">
-                  <button type="button" class="btn btn-secondary btn-player-action left-hand-side" role="button" value="Hit">HIT</button>
-                  <button type="button" class="btn btn-secondary btn-player-action" role="button" value="Stand">STAND</button>
+               <div class="col-sm-4 col-8 justify-content-center" id="player-actions">
+                  <div class="row no-gutters">
+                     <div class="col-sm-6 col-12 left-hand-side">
+                        <button type="button" class="btn btn-secondary btn-player-action left-hand-side" role="button" value="Hit">HIT</button>
+                        <button type="button" class="btn btn-secondary btn-player-action" role="button" value="Stand">STAND</button>
+                     </div>
+                     <div class="col-sm-6 col-12">
+                        <button type="button" class="btn btn-secondary btn-player-action" role="button" value="Double">DOUBLE</button>
+                        <button type="button" class="btn btn-secondary btn-player-action" role="button" value="Split">SPLIT</button>
+                     </div>
+                  </div>
                </div>
-               <div class="col-sm-6 col-12">
-                  <button type="button" class="btn btn-secondary btn-player-action" role="button" value="Double">DOUBLE</button>
-                  <button type="button" class="btn btn-secondary btn-player-action" role="button" value="Split">SPLIT</button>
+               <div class="col-sm-4 col-2" id="new-deal">
+                  <div class="row no-gutters">
+                     <button type="button" class="btn btn-primary" id="new-hand-button" value="new-hand">DEAL</button>
+                  </div>
                </div>
-            </div>
-         </div>
-         <div class="col-sm-4 col-2" id="new-deal">
-            <div class="row no-gutters">
-               <button type="button" class="btn btn-primary" id="new-hand-button" value="new-hand">DEAL</button>
-            </div>
-         </div>
-      </div> <!-- end of row -->
-   </div>
+            </div> <!-- end of row -->
+         </article>
+      </div>
+   </main>
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
